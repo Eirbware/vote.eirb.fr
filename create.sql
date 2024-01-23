@@ -17,6 +17,7 @@ CREATE TABLE Campagnes(
     dateOuvertureVotes DATE NOT NULL,
     dateFermetureVotes DATE NOT NULL,
     typeCampagne INT NOT NULL,
+    ecole VARCHAR(32) NOT NULL,
 );
 
 ALTER TABLE Campagnes
