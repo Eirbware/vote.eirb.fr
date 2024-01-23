@@ -11,7 +11,7 @@ ADD PRIMARY KEY(login, idCampagne);
 
 -- Campagnes
 CREATE TABLE Campagnes(
-    id AUTO_INCREMENT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     dateDebut DATE NOT NULL,
     dateFin DATE NOT NULL,
     dateOuvertureVotes DATE NOT NULL,
@@ -42,7 +42,7 @@ ADD PRIMARY KEY(nomType);
 
 -- Listes
 CREATE TABLE Listes(
-    id AUTO_INCREMENT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     idCampagne INT NOT NULL,
     nom VARCHAR(64) NOT NULL,
     nbVotes INT NOT NULL,
