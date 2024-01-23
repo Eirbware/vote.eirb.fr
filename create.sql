@@ -2,7 +2,7 @@
 -- EnregistrementVotes
 CREATE TABLE EnregistrementVotes(
     login VARCHAR(32) NOT NULL,
-    idCampagne INT NOT NULL,
+    idCampagne INT NOT NULL
 );
 
 ALTER TABLE EnregistrementVotes
@@ -17,7 +17,7 @@ CREATE TABLE Campagnes(
     dateOuvertureVotes DATE NOT NULL,
     dateFermetureVotes DATE NOT NULL,
     typeCampagne INT NOT NULL,
-    ecole VARCHAR(32) NOT NULL,
+    ecole VARCHAR(32) NOT NULL
 );
 
 ALTER TABLE Campagnes
@@ -34,7 +34,7 @@ CHECK(dateOuvertureVotes <= dateFermetureVotes);
 
 -- TypeCampagnes
 CREATE TABLE TypeCampagnes(
-    nomType VARCHAR(32) NOT NULL,
+    nomType VARCHAR(32) NOT NULL
 );
 
 ALTER TABLE TypeCampagnes
@@ -46,7 +46,7 @@ CREATE TABLE Listes(
     id INT NOT NULL AUTO_INCREMENT,
     idCampagne INT NOT NULL,
     nom VARCHAR(64) NOT NULL,
-    nbVotes INT NOT NULL,
+    nbVotes INT NOT NULL
 );
 
 ALTER TABLE Listes
