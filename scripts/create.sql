@@ -16,20 +16,12 @@ CREATE TABLE Campagnes(
     dateFin DATE NOT NULL,
     dateOuvertureVotes DATE NOT NULL,
     dateFermetureVotes DATE NOT NULL,
-    typeCampagne INT NOT NULL,
-    ecole VARCHAR(32) NOT NULL
+    typeCampagne VARCHAR(32) NOT NULL,
+    ecole VARCHAR(32) NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT debutAvantFin CHECK(dateDebut <= dateFin),
+    CONSTRAINT ouvertureAvantFermeture CHECK(dateOuvertureVotes <= dateFermetureVotes),
 );
-
-ALTER TABLE Campagnes
-ADD PRIMARY KEY(id);
-
-ALTER TABLE Campagnes
-ADD CONSTRAINT debutAvantFin
-CHECK(dateDebut <= dateFin);
-
-ALTER TABLE Campagnes
-ADD CONSTRAINT ouvertureAvantFermeture
-CHECK(dateOuvertureVotes <= dateFermetureVotes);
 
 
 -- TypeCampagnes
