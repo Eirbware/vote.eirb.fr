@@ -42,3 +42,4 @@ if(!isset($_SESSION["user"])){
     $_SESSION["user"] = ["ecole" => $ecole, "nom_complet" => $nom_complet, "diplome" => $diplome, "login" => $login];
 }
 
+?>
