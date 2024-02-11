@@ -1,3 +1,5 @@
+<?php require_once ('../private/auth.php'); ?>
+
 <?php include('../includes/header.php'); ?>
 
 <!DOCTYPE html>
@@ -8,13 +10,6 @@
 	<title>Vote en ligne</title>
 	<link rel="stylesheet" href="/assets/css/style.css">
 	<style>
-		.cards a h4 {
-			margin-bottom: 0 !important; 
-		}
-		.cards a {
-			box-shadow: 0px 3px var(--default-gray) !important;
-		}
-
 		.confirmation {
 			display: flex;
 			flex-direction: row;
@@ -31,7 +26,7 @@
 			background-color: var(--accent); 
 			border: 2px solid var(--accent); 
 			color: black;
-			text-decoration: none; /* Supprimer le soulignement */
+			text-decoration: none; 
 		}
 
 		.btn.cancel {

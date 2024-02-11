@@ -1,3 +1,5 @@
+<?php require_once ('../private/auth.php'); ?>
+
 <?php include('../includes/header.php'); ?>
 
 <!DOCTYPE html>
@@ -78,11 +80,22 @@
 		<label class="input-label" for="list">Nom de la liste</label>
 		<input type="text" class="input-text" name="list" id="list" required>
 		<div class="confirmation">
-			<a href="/pages/confirmation.php" class="btn">Valider</a>
+			<a id="btn-valider" class="btn">Valider</a>
 			<a href="/pages/choice.php" class="btn cancel">Annuler</a>
 		</div>
 	</section>
 </main>
+<script>
+    const btnValider = document.getElementById('btn-valider');
+
+    btnValider.addEventListener('click', function() {
+        const nomListe = document.getElementById('list').value;
+
+        const urlConfirmation = `/pages/confirmation.php?choix=${encodeURIComponent(nomListe)}`;
+
+        window.location.href = urlConfirmation;
+    });
+</script>
 </body>
 </html>
 

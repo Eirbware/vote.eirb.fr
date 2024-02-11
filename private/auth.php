@@ -4,16 +4,21 @@ require_once __DIR__ . '/util.php';
 use JetBrains\PhpStorm\NoReturn;
 
 session_start();
+$url = get_current_request_url(false);
+$serviceUrl = "https://tcoutan.zzz.bordeaux-inp.fr/casAuth/";
 
 #[NoReturn] function redirect_cas(): void
 {
-    redirect("https://cas.bordeaux-inp.fr/login" . "?service=" . get_current_request_url(false));
+	global $serviceUrl;
+	global $url;
+    redirect("https://cas.bordeaux-inp.fr/login" . "?service=" . $serviceUrl . "?url=" . $url);
 }
 
 function validate_cas_token(string $casToken): mixed
 {
-    $serviceUrl = get_current_request_url(false);
-    $validationUrl = "https://cas.bordeaux-inp.fr/p3/serviceValidate" . "?ticket=$casToken&service=$serviceUrl&format=json";
+	global $serviceUrl;
+	global $url;
+    $validationUrl = "https://cas.bordeaux-inp.fr/p3/serviceValidate" . "?ticket=$casToken&service=$serviceUrl?url=$url&format=json";
     $ch = curl_init($validationUrl);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -23,6 +28,7 @@ function validate_cas_token(string $casToken): mixed
     curl_close($ch);
     $res = json_decode($resStr, true);
     if (array_key_exists("authenticationFailure", $res["serviceResponse"])) {
+		error_log("CAS validation failed: " . $res["serviceResponse"]["authenticationFailure"]["code"]);
         redirect_cas();
     }
     return $res;

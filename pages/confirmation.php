@@ -1,5 +1,48 @@
+<?php require_once ('../private/auth.php'); ?>
+
 <?php include('../includes/header.php'); ?>
 
+<?php
+if (!isset($_GET['choix'])) {
+	header('Location: /pages/choice.php');
+	exit;
+} 
+// Récupère le choix de l'utilisateur depuis l'URL
+$choixUtilisateur = $_GET['choix'];
+
+// Utilise le choix de l'utilisateur pour afficher la carte correspondante
+switch($choixUtilisateur) {
+	case "mafieirb":
+		$logo = "/assets/images/mafieirb.png";
+		$nom = "Mafi'eirb";
+		break;
+	case "dionyseirb":
+		$logo = "/assets/images/dionyseirb.png";
+		$nom = "Dionys'eirb";
+		break;
+	case "kalashcrimineirb":
+		$logo = "/assets/images/kalashcrimineirb.png";
+		$nom = "Kalashcri</br>min'eirb";
+		break;
+	case "blanc":
+		$logo = "/assets/images/other-vote.svg";
+		$nom = "Blanc";
+		break;
+	default:
+		$logo = "/assets/images/help.svg";
+		$nom = "$choixUtilisateur";
+}
+
+// Ouverture de la connexion à la base de données mysql
+$conn = new mysqli($host, $username, $password, $database);
+
+// Vérifie si la connexion a échoué
+if ($conn->connect_error) {
+	die("La connexion à la base de données a échoué: " . $conn->connect_error);
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,6 +56,10 @@
         }
 		.cards a {
 			box-shadow: 0px 3px var(--default-gray) !important;
+		}
+
+		.cards a:hover {
+    		transform: none !important;
 		}
 
 		.confirmation {
@@ -31,7 +78,7 @@
 			background-color: var(--accent); 
 			border: 2px solid var(--accent); 
 			color: black;
-			text-decoration: none; /* Supprimer le soulignement */
+			text-decoration: none; 
 		}
 
 		.btn.cancel {
@@ -54,10 +101,10 @@
 		</div>
         <h3>Confirmez votre choix</h3>
         <div class="cards">
-            <a href="https://mafi.eirb.fr/" rel="nofollow">
-                <img src="/assets/images/mafieirb.png" class="card-logo">
+            <a rel="nofollow">
+                <img src="<?= $logo ?>" class="card-logo">
                 <div class="card-text-box">
-                    <h4>Mafi'eirb</h4>
+                    <h4><?= $nom ?></h4>
                 </div>
             </a>
 		</div>
