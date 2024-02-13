@@ -1,15 +1,38 @@
 <?php
-include('private/config.php');
-$deadline = DEADLINE;
 
+include('private/config.php');
+
+// Connexion à la base de données
+$conn = new mysqli($host, $username, $password, $database);
+
+if ($conn->connect_error) {
+    die("La connexion à la base de données a échoué: " . $conn->connect_error);
+}
+
+// Récupération de la date de début et de fin du vote
+$stmt = $conn->prepare("SELECT dateOuvertureVotes, dateFermetureVotes FROM Campagnes WHERE id = ?");
+$stmt->bind_param("i", $IDCAMPAGNE_EN_COURS);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($dateOuvertureVotes, $dateFermetureVotes);
+$stmt->fetch();
+$stmt->close();
+
+// Conversion des dates en timestamp
+$startDate = strtotime($dateOuvertureVotes);
+$endDate = strtotime($dateFermetureVotes);
+
+// Date et heure actuelles
 $currentDate = time();
 
-// Vérifie si la date actuelle est après la date de fin du vote
-if ($currentDate > $deadline) {
+// Vérifie si la date actuelle est après la date de début et avant la date de fin du vote
+if ($currentDate < $startDate || $currentDate > $endDate) {
     header("Location: /pages/error.php?returnCode=NO_VOTE");
     exit; 
 }
 ?>
+
+
 
 <?php include('includes/header.php'); ?>
 
@@ -76,7 +99,7 @@ if ($currentDate > $deadline) {
 			<a rel="nofollow">
 				<img src="/assets/images/kalashcrimineirb.png" class="card-logo">
 				<div class="card-text-box">
-					<h4>Kalashcri<br>min'eirb</h4>
+					<h4>Kalashcrimi</br>n'eirb</h4>
 					<p>Votez pour votre liste préférée</p>
 					<img src="/assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
 				</div>
@@ -86,7 +109,7 @@ if ($currentDate > $deadline) {
     </section>
 </main>
 <script>
-    const targetDate = new Date(<?php echo json_encode(date('Y-m-d\TH:i:s', $deadline)); ?>); // Utilisation de la variable PHP deadline
+    const targetDate = new Date(<?php echo json_encode(date('Y-m-d\TH:i:s', $endDate)); ?>); // Utilisation de la variable PHP deadline
     
     function updateCountdown() {
         const currentDate = new Date();

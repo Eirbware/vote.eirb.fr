@@ -11,8 +11,8 @@ CREATE TABLE Campagnes(
     id INT NOT NULL AUTO_INCREMENT,
     dateDebut DATE NOT NULL,
     dateFin DATE NOT NULL,
-    dateOuvertureVotes DATE NOT NULL,
-    dateFermetureVotes DATE NOT NULL,
+    dateOuvertureVotes DATETIME NOT NULL,
+    dateFermetureVotes DATETIME NOT NULL,
     typeCampagne VARCHAR(32) NOT NULL,
     ecole VARCHAR(32) NOT NULL,
     PRIMARY KEY(id),
@@ -57,3 +57,19 @@ VALUES ('BDE'),
        ('BDS'),
        ('BDA'),
        ('Autres');
+
+-- Insertion de données fictives pour la table Campagnes
+INSERT INTO Campagnes (dateDebut, dateFin, dateOuvertureVotes, dateFermetureVotes, typeCampagne, ecole) VALUES
+('2024-02-05', '2024-02-14', '2024-02-12 12:00:00', '2024-02-23 12:00:00', 'BDE', 'ENSEIRB');
+
+-- Insertion de données fictives pour la table Listes
+INSERT INTO Listes (idCampagne, nom, nbVotes) VALUES
+(1, 'mafieirb', 0),
+(1, 'dionyseirb', 0),
+(1, 'kalashcrimineirb', 0);
+
+-- Insertion de données fictives pour la table EnregistrementVotes
+INSERT INTO EnregistrementVotes (login, idCampagne) VALUES
+('adurand015', 1),
+('tbrintet', 1),
+('smoniez', 1);

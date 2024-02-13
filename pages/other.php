@@ -45,7 +45,6 @@
 		.input-text {
 			background-color: #eeeeee;
 			border-radius: .25rem .25rem 0 0;
-			/* box-shadow: inset 0 0 2px 0 #3a3a3a; */
 			box-shadow: inset 0 -3px 0 0 var(--primary); 
 			color: #3a3a3a;
 			border: none;
@@ -63,6 +62,16 @@
 			font-weight: 500;
 			margin-bottom: .5rem;
 		}
+
+		.input-error {
+			box-shadow: inset 0 -3px 0 0 red;
+		}
+
+		.error-message {
+			color: red;
+			font-size: 0.8rem;
+			margin-top: 0.5em;
+		}
 	</style>
 </head>
 <body>
@@ -78,7 +87,8 @@
 		</div>
 		<h3>Renseignez le nom de la liste</h3>
 		<label class="input-label" for="list">Nom de la liste</label>
-		<input type="text" class="input-text" name="list" id="list" required>
+		<input type="text" class="input-text" name="list" id="list" required maxlength="128">
+		<div id="error-message" class="error-message"></div>
 		<div class="confirmation">
 			<a id="btn-valider" class="btn">Valider</a>
 			<a href="/pages/choice.php" class="btn cancel">Annuler</a>
@@ -87,13 +97,39 @@
 </main>
 <script>
     const btnValider = document.getElementById('btn-valider');
+    const inputListe = document.getElementById('list');
+    const errorMessage = document.getElementById('error-message');
 
     btnValider.addEventListener('click', function() {
-        const nomListe = document.getElementById('list').value;
+        const nomListe = inputListe.value;
 
+        // Vérifier si l'input est vide
+        if (nomListe.trim() === '') {
+            // Afficher un message d'erreur sous l'input
+            errorMessage.textContent = "Veuillez saisir un nom de liste.";
+            // Ajouter une classe pour changer le style de l'input
+            inputListe.classList.add('input-error');
+            return;
+        }
+
+        // Vérifier si la longueur de l'entrée dépasse 64 caractères
+        if (nomListe.length > 64) {
+            // Afficher un message d'erreur sous l'input
+            errorMessage.textContent = "Le nom de la liste ne peut pas dépasser 64 caractères.";
+            // Ajouter une classe pour changer le style de l'input
+            inputListe.classList.add('input-error');
+            return;
+        }
+
+        // Si l'input n'est pas vide et la longueur est valide, continuer avec la confirmation
         const urlConfirmation = `/pages/confirmation.php?choix=${encodeURIComponent(nomListe)}`;
-
         window.location.href = urlConfirmation;
+    });
+
+    // Supprimer le message d'erreur et la classe d'erreur lorsque l'utilisateur commence à saisir dans l'input
+    inputListe.addEventListener('input', function() {
+        errorMessage.textContent = ''; // Effacer le message d'erreur
+        inputListe.classList.remove('input-error'); // Supprimer la classe d'erreur
     });
 </script>
 </body>

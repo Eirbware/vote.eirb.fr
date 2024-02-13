@@ -22,7 +22,7 @@ switch($choixUtilisateur) {
 		break;
 	case "kalashcrimineirb":
 		$logo = "/assets/images/kalashcrimineirb.png";
-		$nom = "Kalashcri</br>min'eirb";
+		$nom = "Kalashcrimin'eirb";
 		break;
 	case "blanc":
 		$logo = "/assets/images/other-vote.svg";
@@ -33,16 +33,8 @@ switch($choixUtilisateur) {
 		$nom = "$choixUtilisateur";
 }
 
-// Ouverture de la connexion à la base de données mysql
-$conn = new mysqli($host, $username, $password, $database);
-
-// Vérifie si la connexion a échoué
-if ($conn->connect_error) {
-	die("La connexion à la base de données a échoué: " . $conn->connect_error);
-}
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -104,16 +96,50 @@ if ($conn->connect_error) {
             <a rel="nofollow">
                 <img src="<?= $logo ?>" class="card-logo">
                 <div class="card-text-box">
-                    <h4><?= $nom ?></h4>
+					<h4 id="nomListe"><?= $nom ?></h4>
                 </div>
             </a>
 		</div>
 		<div class="confirmation">
-			<a href="/pages/receipt.php" class="btn">Confirmer</a>
+			<a class="btn" id="confirmBtn">Confirmer</a>
 			<a href="/pages/choice.php" class="btn cancel">Annuler</a>
 		</div>
     </section>
 </main>
+<script>
+var confirmBtn = document.getElementById("confirmBtn");
+
+confirmBtn.addEventListener("click", function() {
+    // Création d'une instance de XMLHttpRequest
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../api/vote.php");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    var choixUtilisateur = "<?= $choixUtilisateur ?>";
+    
+    xhr.send(JSON.stringify({ choixUtilisateur: choixUtilisateur }));
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            window.location.href = "/pages/receipt.php";
+        } else {
+            window.location.href = "/pages/error.php?returnCode=" + xhr.status;
+        }
+    };
+});
+const nomListe = document.getElementById('nomListe');
+const texteListe = nomListe.textContent;
+let nouveauTexte = '';
+
+for (let i = 0; i < texteListe.length; i++) {
+	nouveauTexte += texteListe[i];
+	if ((i + 1) % 11 === 0) {
+		nouveauTexte += '<br>';
+	}
+}
+
+nomListe.innerHTML = nouveauTexte;
+</script>
 </body>
 </html>
 

@@ -225,6 +225,6 @@ main h2 {
 .progress-steps li.active:before {
     border-color: var(--secondary);
 }
-.progress-steps li.active + li:after {
+.progress-steps li.active:after {
     background-color: var(--secondary);
 }

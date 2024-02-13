@@ -1,4 +1,10 @@
 <?php
-// Définition des variables globales
-define('DEADLINE', strtotime("2024-02-15 00:00:00"));
+
+$IDCAMPAGNE_EN_COURS = 1; // ID de la campagne en cours
+
+$host = 'localhost'; 
+$username = 'bot'; 
+$password = 'V0teB0t45!+'; 
+$database = 'voteirb'; 
+
 ?>
