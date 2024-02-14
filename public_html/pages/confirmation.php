@@ -111,7 +111,7 @@ var confirmBtn = document.getElementById("confirmBtn");
 
 confirmBtn.addEventListener("click", function() {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:8080/vote.php");
+    xhr.open("POST", "/api/vote.php");
     xhr.setRequestHeader("Content-Type", "application/json");
 
     var choixUtilisateur = "<?= $choixUtilisateur ?>";

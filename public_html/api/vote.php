@@ -1,8 +1,7 @@
 <?php
 
-include_once('../private/config.php');
+include_once('../../private/config.php');
 
-header("Access-Control-Allow-Origin: *");
 
 // ====== Vérification si la requête est une requête POST
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
