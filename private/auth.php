@@ -1,20 +1,18 @@
 <?php
 require_once __DIR__ . '/util.php';
 
-use JetBrains\PhpStorm\NoReturn;
-
 session_start();
 $url = get_current_request_url(false);
 $serviceUrl = "https://tcoutan.zzz.bordeaux-inp.fr/casAuth/";
 
-#[NoReturn] function redirect_cas(): void
+function redirect_cas(): void
 {
 	global $serviceUrl;
 	global $url;
     redirect("https://cas.bordeaux-inp.fr/login" . "?service=" . $serviceUrl . "?url=" . $url);
 }
 
-function validate_cas_token(string $casToken): mixed
+function validate_cas_token(string $casToken)
 {
 	global $serviceUrl;
 	global $url;
