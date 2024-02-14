@@ -21,7 +21,7 @@ switch($choixUtilisateur) {
 		break;
 	case "kalashcrimineirb":
 		$logo = "/assets/images/kalashcrimineirb.png";
-		$nom = "Kalashcrimin'eirb";
+		$nom = "Kalash Crimin'eirb";
 		break;
 	case "blanc":
 		$logo = "/assets/images/other-vote.svg";

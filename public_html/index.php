@@ -94,10 +94,10 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
                     <img src="assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
                 </div>
             </a>
-			<a rel="nofollow">
+			<a href="https://t.me/+VURLfBv_V-A5NTBk" rel="nofollow">
 				<img src="/assets/images/kalashcrimineirb.png" class="card-logo">
 				<div class="card-text-box">
-					<h4>Kalashcrimi<br>n'eirb</h4>
+					<h4>Kalash <br>Crimin'eirb</h4>
 					<p>Votez pour votre liste préférée</p>
 					<img src="/assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
 				</div>
