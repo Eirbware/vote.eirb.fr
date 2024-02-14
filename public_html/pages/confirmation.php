@@ -1,6 +1,5 @@
 <?php require_once ('../../private/auth.php'); ?>
 
-<?php include('../pages/header.php'); ?>
 
 <?php
 if (!isset($_GET['choix'])) {
@@ -42,6 +41,8 @@ switch($choixUtilisateur) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vote en ligne</title>
     <link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="stylesheet" href="/assets/css/header.css">
+	<link rel="stylesheet" href="/assets/css/footer.css">
     <style>
         .cards a h4 {
             margin-bottom: 0 !important; 
@@ -81,6 +82,8 @@ switch($choixUtilisateur) {
     </style>
 </head>
 <body>
+<?php include('../pages/header.php'); ?>
+
 <main>
     <h2>Election du Bureau Des Élèves 2024</h2>
     <section class="campagnes">
@@ -106,6 +109,8 @@ switch($choixUtilisateur) {
 		</div>
     </section>
 </main>
+<?php include('../pages/footer.php'); ?>
+
 <script>
 var confirmBtn = document.getElementById("confirmBtn");
 
@@ -141,5 +146,3 @@ nomListe.innerHTML = nouveauTexte;
 </script>
 </body>
 </html>
-
-<?php include('../pages/footer.php'); ?>

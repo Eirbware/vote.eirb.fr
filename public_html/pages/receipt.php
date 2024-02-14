@@ -1,7 +1,5 @@
 <?php require_once ('../../private/auth.php'); ?>
 
-<?php include('../pages/header.php'); ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,6 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Vote en ligne</title>
 	<link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="stylesheet" href="/assets/css/header.css">
+	<link rel="stylesheet" href="/assets/css/footer.css">
 	<style>
 		.confirmation {
 			display: flex;
@@ -37,6 +37,8 @@
 	</style>
 </head>
 <body>
+<?php include('../pages/header.php'); ?>
+
 <main>
 	<h2>Election du Bureau Des Élèves 2024</h2>
 	<section class="campagnes">
@@ -53,7 +55,7 @@
 		</div>
 	</section>
 </main>
-</body>
-</html>
 
 <?php include('../pages/footer.php'); ?>
+</body>
+</html>

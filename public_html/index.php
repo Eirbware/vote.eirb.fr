@@ -32,10 +32,6 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
 }
 ?>
 
-
-
-<?php include('pages/header.php'); ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -43,6 +39,8 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vote en ligne</title>
     <link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="stylesheet" href="/assets/css/header.css">
+	<link rel="stylesheet" href="/assets/css/footer.css">
     <style>
         main {
             padding: 1em;
@@ -66,8 +64,8 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
     </style>
 </head>
 <body>
+<?php include('pages/header.php'); ?>
 <main>
-
     <h2>Election du Bureau Des Élèves 2024</h2>
     <section class="campagnes">
         <div class="alert" role="alert">
@@ -99,7 +97,7 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
 			<a rel="nofollow">
 				<img src="/assets/images/kalashcrimineirb.png" class="card-logo">
 				<div class="card-text-box">
-					<h4>Kalashcrimi</br>n'eirb</h4>
+					<h4>Kalashcrimi<br>n'eirb</h4>
 					<p>Votez pour votre liste préférée</p>
 					<img src="/assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
 				</div>
@@ -108,6 +106,7 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
         <a href="/pages/choice.php" class="btn">Passer au vote</a>
     </section>
 </main>
+<?php include('pages/footer.php'); ?>
 <script>
     const targetDate = new Date(<?php echo json_encode(date('Y-m-d\TH:i:s', $endDate)); ?>); // Utilisation de la variable PHP deadline
     
@@ -130,5 +129,3 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
 </script>
 </body>
 </html>
-
-<?php include('pages/footer.php'); ?>

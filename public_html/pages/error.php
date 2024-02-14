@@ -1,3 +1,5 @@
+<?php require_once ('../../private/auth.php'); ?>
+
 <?php
 $returnCode = $_GET['returnCode'];
 
@@ -31,7 +33,6 @@ if (!isset($returnCode)) {
 	
 }
 ?>
-<?php include('../pages/header.php'); ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -40,6 +41,8 @@ if (!isset($returnCode)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Erreur <?php echo $errorCode; ?></title>
 	<link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="stylesheet" href="/assets/css/header.css">
+	<link rel="stylesheet" href="/assets/css/footer.css">
 	<style>
 		main {
 			padding: 2em;
@@ -71,12 +74,16 @@ if (!isset($returnCode)) {
 	</style>
 </head>
 <body>
+<?php include('../pages/header.php'); ?>
+
 	<main>
 		<h2>Erreur <?php echo $errorCode; ?></h2>
 		<h4><?php echo $errorMessage; ?></h4>
 		<a href="/index.php" class="btn cancel">Retour à l'accueil</a>
 	</main>
+
+<?php include('../pages/footer.php'); ?>
+
 </body>
 </html>
 
-<?php include('../pages/footer.php'); ?>
