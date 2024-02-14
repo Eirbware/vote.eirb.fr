@@ -124,7 +124,7 @@
             </div>
             <div class="footer-bottom">
                 <div class="footer-copyright">
-                    <p>&copy; <?php echo date("Y"); ?> Eirbware - <a href="https://eirbware.eirb.fr/mentions-legales">Mentions légales</a></p>
+                    <p>&copy; <?php echo date("Y"); ?> Eirbware - <a href="https://eirbware.eirb.fr/">Tous droits réservés</a></p>
                 </div>
             </div>
         </div>

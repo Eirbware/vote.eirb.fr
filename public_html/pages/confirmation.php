@@ -1,6 +1,6 @@
-<?php require_once ('../private/auth.php'); ?>
+<?php require_once ('../../private/auth.php'); ?>
 
-<?php include('../includes/header.php'); ?>
+<?php include('../pages/header.php'); ?>
 
 <?php
 if (!isset($_GET['choix'])) {
@@ -110,9 +110,8 @@ switch($choixUtilisateur) {
 var confirmBtn = document.getElementById("confirmBtn");
 
 confirmBtn.addEventListener("click", function() {
-    // Création d'une instance de XMLHttpRequest
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "../api/vote.php");
+    xhr.open("POST", "http://localhost:8080/vote.php");
     xhr.setRequestHeader("Content-Type", "application/json");
 
     var choixUtilisateur = "<?= $choixUtilisateur ?>";
@@ -143,4 +142,4 @@ nomListe.innerHTML = nouveauTexte;
 </body>
 </html>
 
-<?php include('../includes/footer.php'); ?>
+<?php include('../pages/footer.php'); ?>

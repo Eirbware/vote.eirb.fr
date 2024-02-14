@@ -1,6 +1,6 @@
-<?php require_once ('../private/auth.php'); ?>
+<?php require_once ('../../private/auth.php'); ?>
 
-<?php include('../includes/header.php'); ?>
+<?php include('../pages/header.php'); ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -78,4 +78,4 @@
 </body>
 </html>
 
-<?php include('../includes/footer.php'); ?>
+<?php include('../pages/footer.php'); ?>
