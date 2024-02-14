@@ -1,7 +1,5 @@
 <?php
 
-use JetBrains\PhpStorm\NoReturn;
-
 function array_has_all_keys(array $array, ...$keys): bool
 {
     foreach ($keys as $key) {
@@ -12,13 +10,13 @@ function array_has_all_keys(array $array, ...$keys): bool
 }
 
 
-#[NoReturn] function die_with_http_code(int $response_code, string $reason = ""): void
+function die_with_http_code(int $response_code, string $reason = ""): void
 {
     http_response_code($response_code);
     die($reason);
 }
 
-#[NoReturn] function die_with_http_code_json(int $response_code, mixed $jsonObj): void
+function die_with_http_code_json(int $response_code, mixed $jsonObj): void
 {
     http_response_code($response_code);
     header("content-type: application/json");
@@ -42,7 +40,7 @@ function datetime_from_timestamp(int $timestamp): DateTime
     return $dt;
 }
 
-#[NoReturn] function redirect(string $location): void
+function redirect(string $location): void
 {
 //    $casUrl = "https://cas.bordeaux-inp.fr/login" . "?service=" . get_current_request_url();
     header("Location: " . $location);

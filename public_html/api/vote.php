@@ -2,7 +2,6 @@
 
 include_once('../../private/config.php');
 
-
 // ====== Vérification si la requête est une requête POST
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     // Réponse HTTP 405 Méthode non autorisée
