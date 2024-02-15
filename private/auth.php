@@ -2,21 +2,18 @@
 require_once __DIR__ . '/util.php';
 
 session_start();
-$url = get_current_request_url(false);
-$serviceUrl = "https://tcoutan.zzz.bordeaux-inp.fr/casAuth/";
+$serviceUrl = "https://votez.eirb.fr/";
 
 function redirect_cas(): void
 {
 	global $serviceUrl;
-	global $url;
-    redirect("https://cas.bordeaux-inp.fr/login" . "?service=" . $serviceUrl . "?url=" . $url);
+    redirect("https://cas.bordeaux-inp.fr/login" . "?service=" . $serviceUrl);
 }
 
 function validate_cas_token(string $casToken)
 {
 	global $serviceUrl;
-	global $url;
-    $validationUrl = "https://cas.bordeaux-inp.fr/p3/serviceValidate" . "?ticket=$casToken&service=$serviceUrl?url=$url&format=json";
+    $validationUrl = "https://cas.bordeaux-inp.fr/p3/serviceValidate" . "?ticket=$casToken&service=$serviceUrl&format=json";
     $ch = curl_init($validationUrl);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
