@@ -37,7 +37,7 @@ if (!isset($returnCode)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erreur <?php echo $errorCode; ?></title>
+    <title>Erreur <?= htmlspecialchars($errorCode); ?></title>
 	<link rel="stylesheet" href="/assets/css/style.css">
 	<link rel="stylesheet" href="/assets/css/header.css">
 	<link rel="stylesheet" href="/assets/css/footer.css">
@@ -75,8 +75,8 @@ if (!isset($returnCode)) {
 <?php include('../pages/header.php'); ?>
 
 	<main>
-		<h2>Erreur <?= $errorCode; ?></h2>
-		<h4><?= $errorMessage; ?></h4>
+		<h2>Erreur <?= htmlspecialchars($errorCode); ?></h2>
+		<h4><?= htmlspecialchars($errorMessage); ?></h4>
 		<a href="/index.php" class="btn cancel">Retour à l'accueil</a>
 	</main>
 
