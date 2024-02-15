@@ -19,7 +19,7 @@ function die_with_http_code(int $response_code, string $reason = ""): void
 function die_with_http_code_json(int $response_code, mixed $jsonObj): void
 {
     http_response_code($response_code);
-    header("content-type: application/json");
+    header("Content-Type: application/json");
     die(json_encode($jsonObj));
 }
 
