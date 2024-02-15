@@ -89,7 +89,7 @@
 		</div>
 		<h3>Renseignez le nom de la liste</h3>
 		<label class="input-label" for="list">Nom de la liste</label>
-		<input type="text" class="input-text" name="list" id="list" required maxlength="128">
+		<input type="text" class="input-text" name="list" id="list" required maxlength="64">
 		<div id="error-message" class="error-message"></div>
 		<div class="confirmation">
 			<a id="btn-valider" class="btn">Valider</a>
