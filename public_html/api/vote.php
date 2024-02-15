@@ -2,11 +2,13 @@
 
 include_once('../../private/config.php');
 
+header("Content-Type", "application/json");
+
 // ====== Vérification si la requête est une requête POST
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     // Réponse HTTP 405 Méthode non autorisée
     http_response_code(405);
-    echo json_encode(array("message" => "Bad request."));
+    echo json_encode(array("error" => "Bad request."));
     exit;
 }
 
@@ -17,7 +19,7 @@ $data = json_decode(file_get_contents("php://input"));
 if (!isset($data->choixUtilisateur)) {
     // Réponse HTTP 400 Mauvaise requête
     http_response_code(400);
-    echo json_encode(array("message" => "Bad request."));
+    echo json_encode(array("error" => "Bad request."));
     exit;
 }
 
@@ -36,7 +38,7 @@ $stmt = $conn->prepare("SELECT * FROM EnregistrementVotes WHERE login = ? AND id
 $stmt->bind_param("si", $login, $IDCAMPAGNE_EN_COURS);
 if (!$stmt->execute()) {
 	http_response_code(500);
-	echo json_encode(array("message" => "Erreur interne du serveur."));
+	echo json_encode(array("error" => "Erreur interne du serveur."));
 	exit;
 }
 $stmt->store_result();
@@ -44,7 +46,7 @@ $stmt->store_result();
 if ($stmt->num_rows > 0) {
 	// Réponse HTTP 403 Interdit
 	http_response_code(403);
-	echo json_encode(array("message" => "Vous avez déjà voté."));
+	echo json_encode(array("error" => "Vous avez déjà voté."));
 	exit;
 }
 
@@ -53,7 +55,7 @@ $stmt = $conn->prepare("SELECT dateOuvertureVotes, dateFermetureVotes FROM Campa
 $stmt->bind_param("i", $IDCAMPAGNE_EN_COURS);
 if (!$stmt->execute()) {
 	http_response_code(500);
-	echo json_encode(array("message" => "Erreur interne du serveur."));
+	echo json_encode(array("error" => "Erreur interne du serveur."));
 	exit;
 }
 $stmt->store_result();
@@ -70,16 +72,17 @@ $currentDate = time();
 
 if ($currentDate < $startDate || $currentDate > $endDate) {
 	http_response_code(403);
-	echo json_encode(array("message" => "Le vote est actuellement fermé."));
+	echo json_encode(array("error" => "Le vote est actuellement fermé."));
 	exit;
 }
 
 // ======= Préparation de la requête SQL pour insérer l'enregistrement de vote
+$conn->begin_transaction();
 $stmt = $conn->prepare("INSERT INTO EnregistrementVotes (login, idCampagne) VALUES (?, ?)");
 $stmt->bind_param("si", $login, $IDCAMPAGNE_EN_COURS);
 if (!$stmt->execute()) {
 	http_response_code(500);
-	echo json_encode(array("message" => "Erreur interne du serveur."));
+	echo json_encode(array("error" => "Erreur interne du serveur."));
 	exit;
 }
 $stmt->close();
@@ -89,7 +92,7 @@ $stmt = $conn->prepare("SELECT * FROM Listes WHERE nom = ?");
 $stmt->bind_param("s", $data->choixUtilisateur);
 if (!$stmt->execute()) {
     http_response_code(500);
-    echo json_encode(array("message" => "Erreur interne du serveur."));
+    echo json_encode(array("error" => "Erreur interne du serveur."));
     exit;
 }
 $stmt->store_result();
@@ -101,7 +104,7 @@ if ($stmt->num_rows == 0) {
     $stmt->bind_param("si", $data->choixUtilisateur, $IDCAMPAGNE_EN_COURS);
     if (!$stmt->execute()) {
         http_response_code(500);
-        echo json_encode(array("message" => "Erreur interne du serveur."));
+        echo json_encode(array("error" => "Erreur interne du serveur."));
         exit;
     }
     $stmt->close();
@@ -112,10 +115,12 @@ $stmt = $conn->prepare("UPDATE Listes SET nbVotes = nbVotes + 1 WHERE nom = ?");
 $stmt->bind_param("s", $data->choixUtilisateur);
 if (!$stmt->execute()) {
 	http_response_code(500);
-	echo json_encode(array("message" => "Erreur interne du serveur."));
+	echo json_encode(array("error" => "Erreur interne du serveur."));
 	exit;
 }
 $stmt->close();
+
+$conn->commit();
 
 // ====== Réponse HTTP 200 OK
 http_response_code(200);

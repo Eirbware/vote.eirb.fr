@@ -127,7 +127,9 @@ confirmBtn.addEventListener("click", function() {
         if (xhr.status === 200) {
             window.location.href = "/pages/receipt.php";
         } else {
-            window.location.href = "/pages/error.php?returnCode=" + xhr.status;
+            const resp = JSON.parse(xhr.response)
+            const err = encodeURIComponent(resp.error)
+            window.location.href = "/pages/error.php?returnCode=" + xhr.status + "&error=" + err;
         }
     };
 });

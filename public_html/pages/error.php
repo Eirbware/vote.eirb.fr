@@ -2,35 +2,33 @@
 
 <?php
 $returnCode = $_GET['returnCode'];
+$message = $_GET["error"];
+
+function getHumanReadableErrorCode(int $errorCode): string{
+    switch ($errorCode) {
+        case 404:
+            return "Page non trouvée";
+        case 403:
+            return "Accès interdit";
+        case 400:
+            return "Mauvaise requête";
+        case 500:
+            return "Erreur interne du serveur";
+        default:
+            return "Une erreur inattendue s'est produite";
+    }
+}
 
 if (!isset($returnCode)) {
-	$errorCode = isset($_SERVER['REDIRECT_STATUS']) ? $_SERVER['REDIRECT_STATUS'] : 500;
-	switch ($errorCode) {
-		case 404:
-			$errorMessage = "Page non trouvée";
-			break;
-		case 403:
-			$errorMessage = "Accès interdit";
-			break;
-		case 500:
-			$errorMessage = "Erreur interne du serveur";
-			break;
-		default:
-			$errorMessage = "Une erreur inattendue s'est produite";
-			break;
-	}
+	$errorCode = $_SERVER['REDIRECT_STATUS'] ?? 500;
+    $errorMessage = getHumanReadableErrorCode($errorCode);
 } else {
-	switch ($returnCode) {
-		case "NO_VOTE":
-			$errorCode = "";
-			$errorMessage = "Pas de vote en cours";
-			break;
-		default:
-			$errorCode = 500;
-			$errorMessage = "Une erreur inattendue s'est produite";
-			break;
-	}
-	
+    $errorCode = $returnCode;
+    if(!isset($message)){
+        $errorMessage = getHumanReadableErrorCode($errorCode);
+    }else{
+        $errorMessage = $message;
+    }
 }
 ?>
 
@@ -77,8 +75,8 @@ if (!isset($returnCode)) {
 <?php include('../pages/header.php'); ?>
 
 	<main>
-		<h2>Erreur <?php echo $errorCode; ?></h2>
-		<h4><?php echo $errorMessage; ?></h4>
+		<h2>Erreur <?= $errorCode; ?></h2>
+		<h4><?= $errorMessage; ?></h4>
 		<a href="/index.php" class="btn cancel">Retour à l'accueil</a>
 	</main>
 
