@@ -82,7 +82,7 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
                 <img src="assets/images/mafieirb.png" class="card-logo">
                 <div class="card-text-box">
                     <h4>Mafi'eirb</h4>
-                    <p>Votez pour votre liste préférée</p>
+                    <p>Visitez le site de Mafi'eirb</p>
                     <img src="assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
                 </div>
             </a>
@@ -90,7 +90,7 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
                 <img src="assets/images/dionyseirb.png" class="card-logo">
                 <div class="card-text-box">
                     <h4>Dionys'eirb</h4>
-                    <p>Votez pour votre liste préférée</p>
+                    <p>Visitez le site de Dionys'eirb</p>
                     <img src="assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
                 </div>
             </a>
@@ -98,7 +98,7 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
 				<img src="/assets/images/kalashcrimineirb.png" class="card-logo">
 				<div class="card-text-box">
 					<h4>Kalash <br>Crimin'eirb</h4>
-					<p>Votez pour votre liste préférée</p>
+					<p>Visitez le canal telegram de Kalash Crimin'eirb</p>
 					<img src="/assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
 				</div>
 			</a>

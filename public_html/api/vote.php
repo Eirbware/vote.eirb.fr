@@ -2,7 +2,7 @@
 
 include_once('../../private/config.php');
 
-header("Content-Type", "application/json");
+header("Content-Type: application/json");
 
 // ====== Vérification si la requête est une requête POST
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
