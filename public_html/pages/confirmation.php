@@ -29,7 +29,7 @@ switch($choixUtilisateur) {
 		break;
 	default:
 		$logo = "/assets/images/help.svg";
-		$nom = "$choixUtilisateur";
+		$nom = htmlspecialchars($choixUtilisateur);
 }
 
 ?>
@@ -99,7 +99,7 @@ switch($choixUtilisateur) {
             <a rel="nofollow">
                 <img src="<?= $logo ?>" class="card-logo">
                 <div class="card-text-box">
-					<h4 id="nomListe"><?= $nom ?></h4>
+					<h4 id="nomListe"><?= $nom; ?></h4>
                 </div>
             </a>
 		</div>
@@ -119,7 +119,7 @@ confirmBtn.addEventListener("click", function() {
     xhr.open("POST", "/api/vote.php");
     xhr.setRequestHeader("Content-Type", "application/json");
 
-    var choixUtilisateur = "<?= $choixUtilisateur ?>";
+    var choixUtilisateur = "<?= htmlspecialchars($choixUtilisateur) ?>";
     
     xhr.send(JSON.stringify({ choixUtilisateur: choixUtilisateur }));
 
