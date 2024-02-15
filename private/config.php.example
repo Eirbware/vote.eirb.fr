@@ -1,5 +1,7 @@
 <?php
 
+$IDCAMPAGNE_EN_COURS = NUMBER;
+
 $host = "DB HOST";
 $username = "DB USERNAME";
 $password = "DB PASSWORD";
