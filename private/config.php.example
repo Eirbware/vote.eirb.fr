@@ -1,0 +1,8 @@
+<?php
+
+$host = "DB HOST";
+$username = "DB USERNAME";
+$password = "DB PASSWORD";
+$database = "DB NAME";
+
+$_admins = ["ADMIN LIST"];
