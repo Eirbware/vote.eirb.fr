@@ -2,18 +2,18 @@
 require_once __DIR__ . '/util.php';
 
 session_start();
-$serviceUrl = "https://votez.eirb.fr/";
+$url = get_current_request_url(false);
 
 function redirect_cas(): void
 {
-	global $serviceUrl;
-    redirect("https://cas.bordeaux-inp.fr/login" . "?service=" . $serviceUrl);
+	global $url;
+    redirect("https://cas.bordeaux-inp.fr/login" . "?service=" . $url);
 }
 
 function validate_cas_token(string $casToken)
 {
-	global $serviceUrl;
-    $validationUrl = "https://cas.bordeaux-inp.fr/p3/serviceValidate" . "?ticket=$casToken&service=$serviceUrl&format=json";
+	global $url;
+    $validationUrl = "https://cas.bordeaux-inp.fr/p3/serviceValidate" . "?ticket=$casToken&service=$url&format=json";
     $ch = curl_init($validationUrl);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
