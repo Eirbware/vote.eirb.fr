@@ -2,7 +2,7 @@
 require_once __DIR__ . '/util.php';
 
 session_start();
-$url = get_current_request_url(false);
+$url = get_current_request_url(true);
 
 function redirect_cas(): void
 {
