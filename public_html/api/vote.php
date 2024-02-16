@@ -82,18 +82,7 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
 	exit;
 }
 
-// ======= Préparation de la requête SQL pour insérer l'enregistrement de vote
-$conn->begin_transaction();
-$stmt = $conn->prepare("INSERT INTO EnregistrementVotes (login, idCampagne) VALUES (?, ?)");
-$stmt->bind_param("si", $login, $IDCAMPAGNE_EN_COURS);
-if (!$stmt->execute()) {
-	http_response_code(500);
-	echo json_encode(array("error" => "Erreur interne du serveur."));
-	exit;
-}
-$stmt->close();
-
-// ======= Vérifie que la liste choisie existe sinon la crée
+// ======= Vérifie que la liste choisie existe
 $stmt = $conn->prepare("SELECT * FROM Listes WHERE nom = ?");
 $stmt->bind_param("s", $data->choixUtilisateur);
 if (!$stmt->execute()) {
@@ -104,11 +93,22 @@ if (!$stmt->execute()) {
 $stmt->store_result();
 
 if ($stmt->num_rows == 0) {
-    $stmt->close();
     http_response_code(400);
     echo json_encode(array("error" => "Liste invalide!"));
     exit;
 }
+$stmt->close();
+
+// ======= Préparation de la requête SQL pour insérer l'enregistrement de vote
+$conn->begin_transaction();
+$stmt = $conn->prepare("INSERT INTO EnregistrementVotes (login, idCampagne) VALUES (?, ?)");
+$stmt->bind_param("si", $login, $IDCAMPAGNE_EN_COURS);
+if (!$stmt->execute()) {
+	http_response_code(500);
+	echo json_encode(array("error" => "Erreur interne du serveur."));
+	exit;
+}
+$stmt->close();
 
 // ======= Ajout d'un vote à la liste choisie
 $stmt = $conn->prepare("UPDATE Listes SET nbVotes = nbVotes + 1 WHERE nom = ?");
