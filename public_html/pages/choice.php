@@ -66,14 +66,6 @@
 					<img src="/assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
 				</div>
 			</a>
-			<a href="/pages/other.php" rel="nofollow">
-				<img src="/assets/images/help.svg" class="card-logo">
-				<div class="card-text-box">
-					<h4>Autre</h4>
-					<p>Votez pour votre liste préférée</p>
-					<img src="/assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
-				</div>
-			</a>
 		</div>
 	</section>
 </main>

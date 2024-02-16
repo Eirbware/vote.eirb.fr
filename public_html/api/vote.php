@@ -27,11 +27,11 @@ if (!isset($data->choixUtilisateur)) {
 include_once('checkSession.php');
 $login = $_SESSION['user']['login']; 
 
-if (in_array($login, $_bde)) {
-	http_response_code(403);
-    echo json_encode(array("error" => "Les membres du bde ne votent pas en ligne."));
-    exit;
-}
+//if (in_array($login, $_bde)) {
+//	http_response_code(403);
+//    echo json_encode(array("error" => "Les membres du bde ne votent pas en ligne."));
+//    exit;
+//}
 
 // ====== Connexion à la base de données
 $conn = new mysqli($host, $username, $password, $database);
@@ -105,15 +105,9 @@ $stmt->store_result();
 
 if ($stmt->num_rows == 0) {
     $stmt->close();
-    $stmt = $conn->prepare("INSERT INTO Listes (nom, nbVotes, idCampagne) VALUES (?, 0, ?)");
-    // Assurez-vous de fournir une valeur pour idCampagne, sinon utilisez NULL ou une valeur par défaut appropriée
-    $stmt->bind_param("si", $data->choixUtilisateur, $IDCAMPAGNE_EN_COURS);
-    if (!$stmt->execute()) {
-        http_response_code(500);
-        echo json_encode(array("error" => "Erreur interne du serveur."));
-        exit;
-    }
-    $stmt->close();
+    http_response_code(400);
+    echo json_encode(array("error" => "Liste invalide!"));
+    exit;
 }
 
 // ======= Ajout d'un vote à la liste choisie
