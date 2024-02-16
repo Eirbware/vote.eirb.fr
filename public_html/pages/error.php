@@ -1,5 +1,3 @@
-<?php require_once ('../../private/auth.php'); ?>
-
 <?php
 $returnCode = $_GET['returnCode'];
 $message = $_GET["error"];
