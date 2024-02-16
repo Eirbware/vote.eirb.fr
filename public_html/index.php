@@ -26,9 +26,14 @@ $endDate = strtotime($dateFermetureVotes);
 $currentDate = time();
 
 // Vérifie si la date actuelle est après la date de début et avant la date de fin du vote
-if ($currentDate < $startDate || $currentDate > $endDate) {
-    header("Location: /pages/error.php?returnCode=NO_VOTE");
-    exit; 
+if ($currentDate < $startDate) {
+    header("Location: /pages/error.php?returnCode=403&error=L'ouverture des votes est imminente...");
+    exit;
+}
+
+if ($currentDate > $endDate) {
+    header("Location: /pages/error.php?returnCode=403&error=Les votes sont fermés");
+    exit;
 }
 ?>
 
