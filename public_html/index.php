@@ -27,12 +27,12 @@ $currentDate = time();
 
 // Vérifie si la date actuelle est après la date de début et avant la date de fin du vote
 if ($currentDate < $startDate) {
-    header("Location: /pages/error.php?returnCode=403&error=L'ouverture des votes est imminente...");
+    header("Location: /pages/error.php?returnCode=403&error=L'ouverture du vote est imminente...");
     exit;
 }
 
 if ($currentDate > $endDate) {
-    header("Location: /pages/error.php?returnCode=403&error=Les votes sont fermés");
+    header("Location: /pages/error.php?returnCode=403&error=Le vote est actuellement fermé.");
     exit;
 }
 ?>
@@ -71,7 +71,7 @@ if ($currentDate > $endDate) {
 <body>
 <?php include('pages/header.php'); ?>
 <main>
-    <h2>Election du Bureau Des Élèves 2024</h2>
+    <h2>Élection du Bureau Des Élèves 2024</h2>
     <section class="campagnes">
         <div class="alert" role="alert">
             <div class="alert-icon">
