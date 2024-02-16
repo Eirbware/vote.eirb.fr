@@ -66,6 +66,50 @@ if ($currentDate > $endDate) {
             color: #fff;
         }
 
+        .btn-inv {
+            background-color: #fff;
+            color: var(--accent)
+        }
+
+        ::backdrop {
+            background-color: black;
+            opacity: 0.6;
+        }
+
+        .modal_dialog {
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 17px;
+            font-weight: 500;
+            max-width: 700px;
+            border: 0;
+            box-shadow: 0 5px 15px 0 rgba(0,0,0,0.5);
+        }
+            
+        .modal_dialog .btn {
+            margin-top: 2em;
+        }
+        
+        .modal_dialog h4 {
+            color: var(--primary);
+            margin-top: 10px;
+        }
+        
+        .modal_dialog p a {
+            color: black;
+            text-decoration: none;
+        }
+
+        @media screen and (max-width: 900px) {
+            .modal_dialog {
+                margin: 3vw;
+                max-width: 900px;
+            }
+
+            .modal_dialog .btn {
+                margin-top: 1vw;
+            }
+        }
     </style>
 </head>
 <body>
@@ -108,7 +152,32 @@ if ($currentDate > $endDate) {
 				</div>
 			</a>
         </div>
-        <a href="/pages/choice.php" class="btn">Passer au vote</a>
+        <dialog class="modal_dialog">
+            <h4>Confidentialité</h4>
+            <p>
+                En vous connectant, vous acceptez que vos données personnelles soient traitées par Eirbware.
+                <br><br>
+                Nous recueillons:
+                <br>
+                • Votre identifiant de connexion au CAS de l'ENSEIRB-MATMECA
+                <br>
+                <br>    
+                Ces données sont utilisées dans le seul but de pouvoir fournir le service que vous utilisez, et seuls les membres
+                d'Eirbware peuvent accéder à ces données.
+                <br>
+                <br>
+                À tout moment, vous pouvez demander la suppression ou bien la modification de vos informations en nous envoyant un
+                mail à <a href="mailto:eirbware@enseirb-matmeca.fr" class="text-warning">eirbware@enseirb-matmeca.fr</a>.
+                <br>
+                <br>
+                Les données récoltées seront supprimées à la fin de votre scolarité.
+            <p>
+            <div class="buttons" style="float: right">
+                <button class="btn btn-inv">Annuler</button>
+                <a href="/pages/choice.php"><button autofocus class="btn">Confirmer</button></a>
+            </div>
+        </dialog>
+        <button class="btn">Passer au vote</button>
     </section>
 </main>
 <?php include('pages/footer.php'); ?>
@@ -131,6 +200,16 @@ if ($currentDate > $endDate) {
     setInterval(updateCountdown, 1000);
 
     updateCountdown();
+
+    const dialog = document.querySelector("dialog");
+
+    document.querySelector("dialog + button").addEventListener("click", () => {
+        dialog.showModal();
+    });
+
+    document.querySelector("dialog button").addEventListener("click", () => {
+        dialog.close();
+    });
 </script>
 </body>
 </html>
