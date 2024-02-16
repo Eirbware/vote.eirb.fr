@@ -5,7 +5,7 @@
 			<div class="footer-links">
 				<ul>
 					<li><a href="https://eirb.fr">eirb.fr</a></li>
-					<li><a href="https://eirbware.eirb.fr">eirbware.eirb.fr</a></li>
+					<li><a href="https://t.me/eirbware">Canal Telegram Eirbware</a></li>
 					<li><a href="https://bde.eirb.fr">bde.eirb.fr</a></li>
 				</ul>
 			</div>
