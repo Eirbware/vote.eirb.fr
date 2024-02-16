@@ -66,5 +66,5 @@ INSERT INTO Campagnes (dateDebut, dateFin, dateOuvertureVotes, dateFermetureVote
 INSERT INTO Listes (idCampagne, nom, nbVotes) VALUES
 (1, 'mafieirb', 0),
 (1, 'dionyseirb', 0),
-(1, 'kalashcrimineirb', 0);
+(1, 'kalashcrimineirb', 0)
 (1, 'blanc', 0);
