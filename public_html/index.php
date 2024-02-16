@@ -174,7 +174,7 @@ if ($currentDate > $endDate) {
 </main>
 <?php include('pages/footer.php'); ?>
 <script>
-    const targetDate = new Date(<?php echo json_encode(date('Y-m-d\TH:i:s', $endDate)); ?>); // Utilisation de la variable PHP deadline
+    const targetDate = new Date("<?php echo $dateFermetureVotes . "Z"; ?>"); // Utilisation de la variable PHP deadline
     
     function updateCountdown() {
         const currentDate = new Date();
