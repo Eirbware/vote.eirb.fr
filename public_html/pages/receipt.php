@@ -49,7 +49,7 @@
 				<li class="active">Récépissé de vote</li>
 			</ul>
 		</div>
-		<h3>Votre vote à bien été pris en compte</h3>
+		<h3>Votre vote a bien été pris en compte</h3>
 		<div class="confirmation">
 			<a href="/index.php" class="btn cancel">Retour à l'accueil</a>
 		</div>

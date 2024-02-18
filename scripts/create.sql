@@ -60,11 +60,10 @@ VALUES ('BDE'),
 
 -- Insertion de données pour la table Campagnes
 INSERT INTO Campagnes (dateDebut, dateFin, dateOuvertureVotes, dateFermetureVotes, typeCampagne, ecole) VALUES
-('2024-02-05', '2024-02-14', '2024-02-16 19:30:00', '2024-02-19 17:00:00', 'BDE', 'ENSEIRB');
+('2024-02-05', '2024-02-14', '2024-02-16 18:30:00', '2024-02-19 16:00:00', 'BDE', 'ENSEIRB');
 
 -- Insertion de données pour la table Listes
 INSERT INTO Listes (idCampagne, nom, nbVotes) VALUES
 (1, 'mafieirb', 0),
 (1, 'dionyseirb', 0),
-(1, 'kalashcrimineirb', 0),
 (1, 'blanc', 0);

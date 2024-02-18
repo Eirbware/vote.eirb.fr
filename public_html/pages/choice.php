@@ -50,19 +50,10 @@
 					<img src="/assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
 				</div>
 			</a>
-			<a href="/pages/confirmation.php?choix=kalashcrimineirb" rel="nofollow">
-				<img src="/assets/images/kalashcrimineirb.png" class="card-logo">
-				<div class="card-text-box">
-					<h4>Kalash <br>Crimin'eirb</h4>
-					<p>Votez pour votre liste préférée</p>
-					<img src="/assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
-				</div>
-			</a>
 			<a href="/pages/confirmation.php?choix=blanc" rel="nofollow">
 				<img src="/assets/images/other-vote.svg" class="card-logo">
 				<div class="card-text-box">
 					<h4>Blanc</h4>
-					<p>Votez pour votre liste préférée</p>
 					<img src="/assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
 				</div>
 			</a>

@@ -143,14 +143,6 @@ if ($currentDate > $endDate) {
                     <img src="assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
                 </div>
             </a>
-			<a href="https://t.me/+VURLfBv_V-A5NTBk" rel="nofollow">
-				<img src="/assets/images/kalashcrimineirb.png" class="card-logo">
-				<div class="card-text-box">
-					<h4>Kalash <br>Crimin'eirb</h4>
-					<p>Visitez le canal telegram de Kalash Crimin'eirb</p>
-					<img src="/assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
-				</div>
-			</a>
         </div>
         <dialog class="modal_dialog">
             <h4>Confidentialité</h4>
@@ -182,7 +174,7 @@ if ($currentDate > $endDate) {
 </main>
 <?php include('pages/footer.php'); ?>
 <script>
-    const targetDate = new Date(<?php echo json_encode(date('Y-m-d\TH:i:s', $endDate)); ?>); // Utilisation de la variable PHP deadline
+    const targetDate = new Date("<?php echo $dateFermetureVotes . "Z"; ?>"); // Utilisation de la variable PHP deadline
     
     function updateCountdown() {
         const currentDate = new Date();
