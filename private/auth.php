@@ -35,8 +35,11 @@ if(!isset($_SESSION["user"])){
     }
     $res = validate_cas_token($_GET["ticket"])["serviceResponse"]["authenticationSuccess"]["attributes"];
     $ecole = $res["ecole"][0];
-    if(strcmp($ecole, "enseirb-matmeca"))
+    $profil = $res["profil"][0];
+    if(strcmp($ecole, "enseirb-matmeca") != 0)
         die_with_http_code(403, "<h1>Forbidden</h1><br>Il faut être à l'enseirb-matmeca");
+    if(strcmp($profil, "student") != 0)
+        die_with_http_code(403, "<h1>Forbidden</h1><br>Il faut être un élève.");
     $nom_complet = $res["nom_complet"][0];
     $login = $res["uid"][0];
     $diplome = $res["diplome"][0];
