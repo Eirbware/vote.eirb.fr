@@ -60,6 +60,7 @@ if ($result->num_rows > 0) {
         echo "Campagne " . $row["id"] . ":";
         echo "<ul>";
         $sumVotes = print_votes_for_campagne_and_get_sum($row["id"], $conn);
+        echo "<li>Nombre de votes : " . $sumVotes . "</li>";
         if($sumVotes !== get_number_of_voting_users_for_campagne($row["id"], $conn)){
             echo "<li><b>Votes incohérents!!!</b>";
         }
