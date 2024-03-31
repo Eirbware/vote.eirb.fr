@@ -127,19 +127,27 @@ if ($currentDate > $endDate) {
         </div>
         <h3>Listes candidates</h3>
         <div class="cards">
-            <a href="https://mafi.eirb.fr/" rel="nofollow">
-                <img src="assets/images/mafieirb.png" class="card-logo">
+            <a href="https://atlant.eirb.fr/" rel="nofollow">
+                <img src="assets/images/atlanteirb.png" class="card-logo">
                 <div class="card-text-box">
-                    <h4>Mafi'eirb</h4>
-                    <p>Visitez le site de Mafi'eirb</p>
+                    <h4>Atlant'eirb</h4>
+                    <p>Visitez le site de Atlant'eirb</p>
                     <img src="assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
                 </div>
             </a>
-            <a href="https://dionys.eirb.fr/" rel="nofollow">
-                <img src="assets/images/dionyseirb.png" class="card-logo">
+            <a href="https://olymp.eirb.fr/" rel="nofollow">
+                <img src="assets/images/olympeirb.png" class="card-logo">
                 <div class="card-text-box">
-                    <h4>Dionys'eirb</h4>
-                    <p>Visitez le site de Dionys'eirb</p>
+                    <h4>Olymp'eirb</h4>
+                    <p>Visitez le site de Olymp'eirb</p>
+                    <img src="assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
+                </div>
+            </a>
+            <a href="https://t.me/lospollosheirbmanos" rel="nofollow">
+                <img src="assets/images/lospollosheirbmanos.png" class="card-logo">
+                <div class="card-text-box">
+                    <h4>Los Pollos Heirbmanos</h4>
+                    <p>Visitez le canal telegram de Los Pollos Heirbmanos</p>
                     <img src="assets/images/arrow-right-short.svg" class="arrow" alt="flèche vers la droite">
                 </div>
             </a>
