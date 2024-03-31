@@ -27,11 +27,11 @@ if (!isset($data->choixUtilisateur)) {
 include_once('checkSession.php');
 $login = $_SESSION['user']['login']; 
 
-//if (in_array($login, $_bde)) {
-//	http_response_code(403);
-//    echo json_encode(array("error" => "Les membres du bde ne votent pas en ligne."));
-//    exit;
-//}
+if (in_array($login, $_bds)) {
+	http_response_code(403);
+	echo json_encode(array("error" => "Les membres du bds ne votent pas en ligne."));
+	exit;
+}
 
 // ====== Connexion à la base de données
 $conn = new mysqli($host, $username, $password, $database);
