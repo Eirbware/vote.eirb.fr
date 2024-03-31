@@ -11,13 +11,17 @@ $choixUtilisateur = $_GET['choix'];
 
 // Utilise le choix de l'utilisateur pour afficher la carte correspondante
 switch($choixUtilisateur) {
-	case "mafieirb":
-		$logo = "/assets/images/mafieirb.png";
-		$nom = "Mafi'eirb";
+	case "atlanteirb":
+		$logo = "/assets/images/atlanteirb.png";
+		$nom = "Atlant'eirb";
 		break;
-	case "dionyseirb":
-		$logo = "/assets/images/dionyseirb.png";
-		$nom = "Dionys'eirb";
+	case "olympeirb":
+		$logo = "/assets/images/olympeirb.png";
+		$nom = "Olymp'eirb";
+		break;
+	case "lospollosheirbmanos":
+		$logo = "/assets/images/lospollosheirbmanos.png";
+		$nom = "Los Pollos Heirbmanos";
 		break;
 	case "blanc":
 		$logo = "/assets/images/other-vote.svg";
