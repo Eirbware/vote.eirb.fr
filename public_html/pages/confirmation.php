@@ -16,7 +16,7 @@ switch($choixUtilisateur) {
 		$nom = "Atlant'eirb";
 		break;
 	case "olympeirb":
-		$logo = "/assets/images/olympeirb.png";
+		$logo = "/assets/images/olympeirb.jpeg";
 		$nom = "Olymp'eirb";
 		break;
 	case "lospollosheirbmanos":
