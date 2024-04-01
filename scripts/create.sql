@@ -58,6 +58,9 @@ VALUES ('BDE'),
        ('BDA'),
        ('Autres');
 
+
+--- BDE
+
 -- Insertion de données pour la table Campagnes
 INSERT INTO Campagnes (dateDebut, dateFin, dateOuvertureVotes, dateFermetureVotes, typeCampagne, ecole) VALUES
 ('2024-02-05', '2024-02-14', '2024-02-16 18:30:00', '2024-02-19 16:00:00', 'BDE', 'ENSEIRB');
@@ -67,3 +70,17 @@ INSERT INTO Listes (idCampagne, nom, nbVotes) VALUES
 (1, 'mafieirb', 0),
 (1, 'dionyseirb', 0),
 (1, 'blanc', 0);
+
+
+--- BDS
+
+-- Insertion de données pour la table Campagnes
+INSERT INTO Campagnes (dateDebut, dateFin, dateOuvertureVotes, dateFermetureVotes, typeCampagne, ecole) VALUES
+('2024-03-25', '2024-04-1', '2024-04-2 11:00:00', '2024-04-4 15:00:00', 'BDS', 'ENSEIRB');
+
+-- Insertion de données pour la table Listes
+INSERT INTO Listes (idCampagne, nom, nbVotes) VALUES
+(2, 'atlanteirb', 0),
+(2, 'olympeirb', 0),
+(2, 'lospollosheirbmanos', 0),
+(2, 'blanc', 0);
