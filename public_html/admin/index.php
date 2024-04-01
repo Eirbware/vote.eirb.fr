@@ -15,7 +15,7 @@ if ($conn->connect_error) {
     die("La connexion à la base de données a échoué: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM Campagnes";
+$sql = "SELECT * FROM Campagnes WHERE id = 2";
 $result = $conn->query($sql);
 
 function get_number_of_voting_users_for_campagne(int $id, mysqli $conn): int{
