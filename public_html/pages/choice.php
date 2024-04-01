@@ -23,7 +23,7 @@
 <?php include('../pages/header.php'); ?>
 
 <main>
-	<h2>Election du Bureau Des Élèves 2024</h2>
+	<h2>Election du Bureau Des Sports 2024</h2>
 	<section class="campagnes">
 		<div class="progress-container">
 			<ul class="progress-steps">

@@ -115,7 +115,7 @@ if ($currentDate > $endDate) {
 <body>
 <?php include('pages/header.php'); ?>
 <main>
-    <h2>Élection du Bureau Des Élèves 2024</h2>
+    <h2>Élection du Bureau Des Sports 2024</h2>
     <section class="campagnes">
         <div class="alert" role="alert">
             <div class="alert-icon">
