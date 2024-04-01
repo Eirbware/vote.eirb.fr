@@ -111,8 +111,8 @@ if (!$stmt->execute()) {
 $stmt->close();
 
 // ======= Ajout d'un vote à la liste choisie
-$stmt = $conn->prepare("UPDATE Listes SET nbVotes = nbVotes + 1 WHERE nom = ?");
-$stmt->bind_param("s", $data->choixUtilisateur);
+$stmt = $conn->prepare("UPDATE Listes SET nbVotes = nbVotes + 1 WHERE nom = ? AND idCampagne = ?");
+$stmt->bind_param("si", $data->choixUtilisateur, $IDCAMPAGNE_EN_COURS);
 if (!$stmt->execute()) {
 	http_response_code(500);
 	echo json_encode(array("error" => "Erreur interne du serveur."));
