@@ -83,8 +83,8 @@ if ($currentDate < $startDate || $currentDate > $endDate) {
 }
 
 // ======= Vérifie que la liste choisie existe
-$stmt = $conn->prepare("SELECT * FROM Listes WHERE nom = ?");
-$stmt->bind_param("s", $data->choixUtilisateur);
+$stmt = $conn->prepare("SELECT * FROM Listes WHERE nom = ? AND idCampagne = ?");
+$stmt->bind_param("si", $data->choixUtilisateur, $IDCAMPAGNE_EN_COURS);
 if (!$stmt->execute()) {
     http_response_code(500);
     echo json_encode(array("error" => "Erreur interne du serveur."));
