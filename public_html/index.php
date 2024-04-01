@@ -136,7 +136,7 @@ if ($currentDate > $endDate) {
                 </div>
             </a>
             <a href="https://olymp.eirb.fr/" rel="nofollow">
-                <img src="assets/images/olympeirb.jpeg" class="card-logo">
+                <img src="assets/images/olympeirb.png" class="card-logo">
                 <div class="card-text-box">
                     <h4>Olymp'eirb</h4>
                     <p>Visitez le site de Olymp'eirb</p>
