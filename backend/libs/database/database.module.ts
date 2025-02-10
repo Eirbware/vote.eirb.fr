@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
+import { Module, OnApplicationShutdown } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypegooseModule } from 'nestjs-typegoose';
-
 import { databaseProviders } from './database.provider';
+import mongoose from 'mongoose';
 
 @Module({
   imports: [
@@ -14,4 +14,8 @@ import { databaseProviders } from './database.provider';
   ],
   exports: [TypegooseModule],
 })
-export class DatabaseModule {}
+export class DatabaseModule implements OnApplicationShutdown {
+  async onApplicationShutdown(): Promise<void> {
+    await mongoose.disconnect();
+  }
+}
