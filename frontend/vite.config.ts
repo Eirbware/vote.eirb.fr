@@ -11,6 +11,9 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       port: parseInt(env.STORE_PORT) || 5173,
     },
+    define: {
+      'import.meta.env.VITE_API_URL': JSON.stringify(env.VITE_API_URL),
+    },
     resolve: {
       alias: {
         '@': '/src',

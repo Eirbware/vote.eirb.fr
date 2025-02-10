@@ -2,11 +2,16 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import { Vote, Results, Login } from '@/pages';
 import { Layout } from './Layout';
+import ProtectedRoute from './ProtectedRoute';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: '',

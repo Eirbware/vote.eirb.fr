@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_FILTER } from '@nestjs/core';
 
 import { DatabaseModule } from 'libs/database/database.module';
-import { CampagneModule } from './Campagne/campagne.module';
-import { AuthModule } from './auth/auth.module';
 import { JwtModule } from 'libs/core/modules/jwt/jwt.module';
-import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from 'libs/core/filters';
+
+import { CampagneModule } from './campagne/campagne.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
