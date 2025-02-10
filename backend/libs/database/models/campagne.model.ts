@@ -12,7 +12,7 @@ export enum CampagneType {
 export class Campagne {
   readonly _id!: Types.ObjectId;
 
-  @prop({ type: String, required: true })
+  @prop({ type: String, required: true, default: 'Enseirb' })
   school!: string;
 
   @prop({ type: String, enum: CampagneType, required: true })

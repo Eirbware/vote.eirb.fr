@@ -43,6 +43,8 @@ export class AuthService {
     return {
       jwt: this.jwtService.sign({
         login: userData.user,
+        firstName: userData.attributes.prenom.join(' '),
+        lastName: userData.attributes.nom.join(' '),
       }),
     };
   }

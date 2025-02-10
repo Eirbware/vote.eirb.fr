@@ -22,3 +22,22 @@
 .animate-slide-down {
   animation: slide-down 7s ease-in-out forwards;
 }
+
+h1,
+h2,
+h3,
+p {
+  color: #161616;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('../assets/font/Outfit/Outfit-VariableFont_wght.ttf')
+    format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+}

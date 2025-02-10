@@ -29,3 +29,7 @@ yarn && yarn run start
 ```
 yarn && yarn dev
 ```
+
+# TODO
+
+- [ ] Easter egg on admin page with a fake score on current campaign, this score should be proportional to the amount of time remaining before the end of the vote session.

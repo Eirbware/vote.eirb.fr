@@ -36,8 +36,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const isLoggedIn = async () => {
-    console.log('isLoggedIn');
-    console.log(jwt);
     if (!jwt) {
       return false;
     }

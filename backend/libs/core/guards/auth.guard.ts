@@ -1,14 +1,12 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { APIError } from '../models';
-
-interface AuthenticatedRequest extends Request {
-  login?: string;
-}
+import { APIError, AuthenticatedRequest } from '../models';
 
 interface JwtPayload {
   login: string;
+  firstName: string;
+  lastName: string;
 }
 
 @Injectable()
@@ -26,7 +24,12 @@ export class AuthGuard implements CanActivate {
     try {
       const payload: JwtPayload =
         await this.jwtService.verifyAsync<JwtPayload>(token);
+
       request.login = payload.login;
+      request.userData = {
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+      };
       return true;
     } catch {
       throw new APIError('Invalid token', 401);

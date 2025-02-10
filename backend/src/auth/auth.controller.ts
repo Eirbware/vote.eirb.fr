@@ -1,6 +1,6 @@
 import { Controller, Get, Query, Req, UseGuards } from '@nestjs/common';
 
-import { APIError } from 'libs/core/models';
+import { APIError, AuthenticatedRequest } from 'libs/core/models';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from 'libs/core/guards';
@@ -22,7 +22,10 @@ export class AuthController {
 
   @Get('me')
   @UseGuards(AuthGuard)
-  me(@Req() req: { login: string }) {
-    return { login: req.login };
+  me(@Req() req: AuthenticatedRequest) {
+    return {
+      login: req.login,
+      userData: req.userData,
+    };
   }
 }
