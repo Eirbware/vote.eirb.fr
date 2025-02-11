@@ -1,18 +1,49 @@
-import { useAuth } from '@/hooks';
+import { useEffect, useState } from 'react';
+
+import { UpcommingVotes, NoVotes } from '@components/Vote';
+import { ICampagne } from '@/models';
+import { useFetchApi } from '@/utils';
 
 export const Vote = () => {
-  const { logout } = useAuth();
+  const [upcommingOrCurrentVotes, setUpcommingOrCurrentVotes] = useState<{
+    upcommingVotes: ICampagne[];
+    currentVotes: ICampagne[];
+  }>({
+    upcommingVotes: [],
+    currentVotes: [],
+  });
+
+  const { fetchApi } = useFetchApi();
+
+  useEffect(() => {
+    const getUpcomingVotes = async () => {
+      try {
+        const response = await fetchApi('campagnes/upcoming-vote');
+        setUpcommingOrCurrentVotes((prevState) => ({
+          ...prevState,
+          upcommingVotes: response,
+        }));
+      } catch {
+        setUpcommingOrCurrentVotes((prevState) => ({
+          ...prevState,
+          upcommingVotes: [],
+        }));
+      }
+    };
+
+    getUpcomingVotes();
+  }, [fetchApi]);
 
   return (
-    <div>
-      <h1>Vote</h1>
-
-      <button
-        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-        onClick={logout}
-      >
-        Logout
-      </button>
-    </div>
+    <>
+      {upcommingOrCurrentVotes.currentVotes.length === 0 &&
+      upcommingOrCurrentVotes.upcommingVotes.length === 0 ? (
+        <NoVotes />
+      ) : (
+        <UpcommingVotes
+          upcommingVotes={upcommingOrCurrentVotes.upcommingVotes}
+        />
+      )}
+    </>
   );
 };

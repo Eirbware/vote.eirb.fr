@@ -25,6 +25,8 @@ export default defineConfig(({ mode }) => {
         '@router': '/src/router',
         '@styles': '/src/styles',
         '@assets': '/src/assets',
+        '@utils': '/src/utils',
+        '@models': '/src/models',
       },
     },
   };

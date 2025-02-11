@@ -32,7 +32,9 @@
       "@providers/*": ["./providers/*"],
       "@router/*": ["./router/*"],
       "@styles/*": ["./styles/*"],
-      "@assets/*": ["./assets/*"]
+      "@assets/*": ["./assets/*"],
+      "@utils/*": ["./utils/*"],
+      "@models/*": ["./models/*"]
     }
   },
   "include": ["src"]

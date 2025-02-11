@@ -30,6 +30,26 @@ p {
   color: #161616;
 }
 
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 221, 3, 0.6),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
 @font-face {
   font-family: 'Outfit';
   src: url('../assets/font/Outfit/Outfit-VariableFont_wght.ttf')
@@ -40,4 +60,8 @@ p {
 
 body {
   font-family: 'Outfit', sans-serif;
+}
+
+.bg-bde-gold {
+  background-color: #ffdd03;
 }

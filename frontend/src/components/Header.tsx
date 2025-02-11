@@ -121,7 +121,7 @@ export const Header = () => {
         <p className="text-gray-600 text-xs text-center">
           Réalisez votre vote pour élire le prochain mandat
         </p>
-        <hr className="border-t border-gray-300 my-6 drop-shadow-lg" />
+        <hr className="border-t border-gray-300 mt-6 mb-1 drop-shadow-lg" />
 
         {modalVisible && (
           <div
