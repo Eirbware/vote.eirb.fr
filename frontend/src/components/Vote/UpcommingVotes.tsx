@@ -89,18 +89,25 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
                   <div className="flex flex-row items-center justify-around md:max-w-2xl mx-auto w-full">
                     {(campagne.lists as IList[]).map((list: IList) => (
                       <div className="flex flex-col gap-1" key={list._id}>
-                        <img
-                          src={`/logos/lists/${list.filename}`}
-                          alt={list.name}
-                          className="w-16 h-16 object-cover rounded-full"
-                        />
                         <a
                           href={list.site}
                           target="_blank"
-                          className="ml-3 text-center flex flex-row gap-1 justify-center  hover:underline"
+                          rel="noopener noreferrer"
+                          className="flex flex-col items-center"
                         >
-                          {list.trigram}
-                          <img src={LinkIcon} className="w-3 h-3" alt="Lien" />
+                          <img
+                            src={`/logos/lists/${list.filename}`}
+                            alt={list.name}
+                            className="w-16 h-16 object-cover rounded-full transition-transform duration-200 hover:scale-105"
+                          />
+                          <span className="text-center flex flex-row gap-1 justify-center hover:underline mt-1 ml-3">
+                            {list.trigram}
+                            <img
+                              src={LinkIcon}
+                              className="w-3 h-3"
+                              alt="Lien"
+                            />
+                          </span>
                         </a>
                       </div>
                     ))}
