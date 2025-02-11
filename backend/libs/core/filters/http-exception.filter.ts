@@ -10,10 +10,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
 
     return response.status(exception.statusCode ?? 400).json({
-      status: 'error',
       message: exception.message,
       code: exception.code,
       details: exception.details,
+      statusCode: exception.statusCode,
     });
   }
 }

@@ -15,7 +15,10 @@ export class ShowCampagneCommand extends CommandRunner {
 
   async run(): Promise<void> {
     try {
-      const campagne = await CampagneModel.getActiveCampagnes();
+      const campagne = await CampagneModel.find({
+        startDate: { $lte: new Date() },
+        endDate: { $gte: new Date() },
+      });
       if (campagne) {
         console.log('Current campagne:', campagne);
       } else {

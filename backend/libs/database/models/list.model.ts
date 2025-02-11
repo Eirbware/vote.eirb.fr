@@ -10,6 +10,15 @@ export class List {
 
   @prop({ type: Number, required: true, default: 0 })
   votesCount!: number;
+
+  @prop({ type: String, required: true })
+  filename!: string;
+
+  @prop({ type: String, required: true })
+  site!: string;
+
+  @prop({ type: String, required: true })
+  trigram!: string;
 }
 
 export type ListModelType = ReturnModelType<typeof List>;

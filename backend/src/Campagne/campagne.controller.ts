@@ -1,16 +1,18 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { CampagneService } from './campagne.service';
+import { AuthGuard } from 'libs/core/guards';
 
-@Controller('campagne')
+@Controller('campagnes')
+@UseGuards(AuthGuard)
 export class CampagneController {
   constructor(private readonly campagneService: CampagneService) {}
 
-  @Get('actives')
-  async getActiveCampagnes() {
-    const campagnes = await this.campagneService.getActiveCampagnes();
-    if (!campagnes) {
+  @Get('upcoming-vote')
+  async getUpcomingVote() {
+    const upcomingVote = await this.campagneService.getUpcomingVote();
+    if (!upcomingVote) {
       return [];
     }
-    return campagnes;
+    return upcomingVote;
   }
 }

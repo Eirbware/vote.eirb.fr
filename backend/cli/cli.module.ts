@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { DatabaseModule } from '../libs/database/database.module';
 import { ShowCampagneCommand } from './commands/current-campagne.command';
+import { SeedDbCommand } from './commands/seed-db.command';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { ShowCampagneCommand } from './commands/current-campagne.command';
     }),
     DatabaseModule,
   ],
-  providers: [ShowCampagneCommand],
+  providers: [ShowCampagneCommand, SeedDbCommand],
 })
 export class CliModule {}

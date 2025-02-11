@@ -12,6 +12,9 @@ export enum CampagneType {
 export class Campagne {
   readonly _id!: Types.ObjectId;
 
+  @prop({ type: String, required: true })
+  desc!: string;
+
   @prop({ type: String, required: true, default: 'Enseirb' })
   school!: string;
 
@@ -32,14 +35,6 @@ export class Campagne {
 
   @prop({ ref: () => List, required: true, default: [] })
   lists!: List[];
-
-  static async getActiveCampagnes(this: CampagneModelType) {
-    const now = new Date();
-    return this.find({
-      startDate: { $lte: now },
-      endDate: { $gte: now },
-    });
-  }
 }
 
 export type CampagneModelType = ReturnModelType<typeof Campagne>;
