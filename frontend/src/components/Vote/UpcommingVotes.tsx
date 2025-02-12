@@ -53,7 +53,7 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
               return (
                 <div
                   key={campagne._id}
-                  className="flex flex-col border border-gray-300 rounded-lg p-4 gap-2 md:max-w-4xl mx-auto"
+                  className="flex flex-col border border-gray-300 rounded-lg p-4 gap-2 md:max-w-4xl mx-auto my-6"
                 >
                   <div className="flex flex-row-reverse justify-between items-center md:flex-col md:items-start">
                     <div className="flex flex-row justify-between md:w-full">

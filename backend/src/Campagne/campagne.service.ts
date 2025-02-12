@@ -6,6 +6,7 @@ import { CampagneModel } from 'libs/database/models/campagne.model';
 export class CampagneService {
   async getUpcomingVote() {
     return CampagneModel.find({
+      startDate: { $lt: new Date() },
       openVoteDate: { $gt: new Date() },
     }).populate({
       path: 'lists',
