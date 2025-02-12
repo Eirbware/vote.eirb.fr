@@ -4,14 +4,21 @@ import { ICampagne, IList } from '@/models';
 
 import LocationIcon from '@/assets/icons/location.svg';
 import InfoIcon from '@/assets/icons/info.svg';
-import LinkIcon from '@/assets/icons/link.svg';
+import VoteIcon from '@/assets/icons/vote.svg';
 
-interface UpcommingVotesProps {
-  upcommingVotes: ICampagne[];
+interface CurrentVotesProps {
+  currentVotes: ICampagne[];
 }
 
-export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
+export const CurrentVotes = ({ currentVotes }: CurrentVotesProps) => {
   const today = new Date();
+
+  const getRemainingDays = (endDate: Date) => {
+    const end = new Date(endDate);
+    const totalDuration = end.getTime() - today.getTime();
+    const remainingDays = Math.floor(totalDuration / (1000 * 60 * 60 * 24));
+    return remainingDays;
+  };
 
   const getProgress = (startDate: Date, endDate: Date) => {
     const start = new Date(startDate);
@@ -29,25 +36,19 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
     return new Date(date).toLocaleDateString('fr-FR', {
       day: 'numeric',
       month: 'short',
-      year: 'numeric',
     });
   };
 
   return (
     <>
-      {upcommingVotes && upcommingVotes.length > 0 && (
+      {currentVotes && currentVotes.length > 0 && (
         <div>
-          <h1 className="text-2xl font-semibold my-4">Les prochains votes</h1>
+          <h1 className="text-2xl font-semibold my-4">Les votes en cours</h1>
           <div>
-            {upcommingVotes.map((campagne) => {
-              const daysBeforeVote = Math.floor(
-                (new Date(campagne.openVoteDate).getTime() - today.getTime()) /
-                  (1000 * 60 * 60 * 24)
-              );
-
+            {currentVotes.map((campagne) => {
               const progress = getProgress(
-                campagne.startDate,
-                campagne.endDate
+                campagne.openVoteDate,
+                campagne.closeVoteDate
               );
 
               return (
@@ -71,26 +72,40 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
                     </h2>
                   </div>
                   <hr className="my-2 border-gray-300" />
-                  <div className="flex flex-row justify-between">
-                    <p>du {formatDate(campagne.startDate)} </p>
-                    <p>au {formatDate(campagne.endDate)}</p>
+                  <div className="flex flex-row">
+                    <p className="flex flex-row gap-2 items-center text-md">
+                      <img
+                        src={InfoIcon}
+                        className="h-8 w-8 bg-bde-gold rounded-full"
+                      />
+                      {getRemainingDays(campagne.closeVoteDate) + 1} jours avant
+                      la fermeture des votes
+                    </p>
                   </div>
 
-                  <div className="w-full border border-gray-300 rounded-3xl bg-gray-100">
-                    <div
-                      className="relative overflow-hidden h-3 rounded-3xl transition-all duration-500 bg-green-300"
-                      style={{
-                        width: `${progress}%`,
-                      }}
-                    >
-                      {progress !== '100.00' && (
-                        <div className="absolute top-0 left-0 w-full h-full shimmer pointer-events-none"></div>
-                      )}
+                  <div className="flex flex-row items-center gap-2">
+                    <div className="flex-1 border border-gray-300 rounded-3xl bg-gray-100">
+                      <div
+                        className="relative overflow-hidden h-3 rounded-3xl transition-all duration-500"
+                        style={{
+                          width: `${progress}%`,
+                          background: `rgb(${(255 * Number(progress)) / 100}, ${
+                            255 - (255 * Number(progress)) / 100
+                          }, 0)`,
+                        }}
+                      >
+                        {progress !== '100.00' && (
+                          <div className="absolute top-0 left-0 w-full h-full shimmer pointer-events-none"></div>
+                        )}
+                      </div>
                     </div>
+
+                    <p className="ml-2 whitespace-nowrap">
+                      {formatDate(campagne.closeVoteDate)}
+                    </p>
                   </div>
 
                   <hr className="my-2 border-gray-300" />
-
                   <div className="flex flex-row items-center justify-around md:max-w-2xl mx-auto w-full">
                     {(campagne.lists as IList[]).map(
                       (list: IList, index: number) => {
@@ -108,13 +123,8 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
                                   alt={list.name}
                                   className="w-16 h-16 object-cover rounded-full transition-transform duration-200 hover:scale-105"
                                 />
-                                <span className="text-center flex flex-row gap-1 justify-center hover:underline mt-1 ml-3">
+                                <span className="text-center flex flex-row gap-1 justify-center hover:underline mt-1">
                                   {list.trigram}
-                                  <img
-                                    src={LinkIcon}
-                                    className="w-3 h-3"
-                                    alt="Lien"
-                                  />
                                 </span>
                               </a>
                             </div>
@@ -126,13 +136,14 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
                       }
                     )}
                   </div>
-
                   <hr className="my-2 border-gray-300" />
-
-                  <p className="flex flex-row gap-2 items-center text-md">
-                    <img src={InfoIcon} className="h-8 w-8" />
-                    {daysBeforeVote} jours avant l'ouverture des votes
-                  </p>
+                  <button className="w-fit mx-auto">
+                    <div className="flex flex-row justify-center items-center gap-2 bg-bde-gold px-4 py-2 rounded-lg text-lg font-semibold">
+                      <img src={VoteIcon} alt="Logout" className="h-5 w-5" />
+                      Exprimer mon vote
+                      <img src={VoteIcon} alt="Logout" className="h-5 w-5" />
+                    </div>
+                  </button>
                 </div>
               );
             })}

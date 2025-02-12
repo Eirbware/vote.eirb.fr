@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { UpcommingVotes, NoVotes } from '@components/Vote';
+import { UpcommingVotes, NoVotes, CurrentVotes } from '@components/Vote';
 import { ICampagne } from '@/models';
 import { useFetchApi } from '@/utils';
 
@@ -29,6 +29,19 @@ export const Vote = () => {
           upcommingVotes: [],
         }));
       }
+
+      try {
+        const response = await fetchApi('campagnes/current-vote');
+        setUpcommingOrCurrentVotes((prevState) => ({
+          ...prevState,
+          currentVotes: response,
+        }));
+      } catch {
+        setUpcommingOrCurrentVotes((prevState) => ({
+          ...prevState,
+          currentVotes: [],
+        }));
+      }
     };
 
     getUpcomingVotes();
@@ -40,9 +53,12 @@ export const Vote = () => {
       upcommingOrCurrentVotes.upcommingVotes.length === 0 ? (
         <NoVotes />
       ) : (
-        <UpcommingVotes
-          upcommingVotes={upcommingOrCurrentVotes.upcommingVotes}
-        />
+        <div className="flex flex-col gap-6">
+          <CurrentVotes currentVotes={upcommingOrCurrentVotes.currentVotes} />
+          <UpcommingVotes
+            upcommingVotes={upcommingOrCurrentVotes.upcommingVotes}
+          />
+        </div>
       )}
     </>
   );

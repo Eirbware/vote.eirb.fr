@@ -12,4 +12,14 @@ export class CampagneService {
       select: '-votesCount',
     });
   }
+
+  async getCurrentVote() {
+    return CampagneModel.find({
+      openVoteDate: { $lt: new Date() },
+      closeVoteDate: { $gt: new Date() },
+    }).populate({
+      path: 'lists',
+      select: '-votesCount',
+    });
+  }
 }

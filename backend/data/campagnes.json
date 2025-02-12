@@ -1,12 +1,12 @@
 [
   {
-    "desc": "Campagnes BDE 2024",
-    "school": "Enseirb",
+    "desc": "Campagnes BDE 2026",
+    "school": "Enseirb-Matmeca",
     "type": "BDE",
-    "startDate": "2025-02-01",
-    "endDate": "2025-02-15",
-    "openVoteDate": "2025-02-17",
-    "closeVoteDate": "2025-02-20",
+    "startDate": "2025-01-15",
+    "endDate": "2025-02-01",
+    "openVoteDate": "2025-02-7",
+    "closeVoteDate": "2025-02-13",
     "lists": []
   }
 ]

@@ -15,4 +15,13 @@ export class CampagneController {
     }
     return upcomingVote;
   }
+
+  @Get('current-vote')
+  async getCurrentVote() {
+    const currentVote = await this.campagneService.getCurrentVote();
+    if (!currentVote) {
+      return [];
+    }
+    return currentVote;
+  }
 }
