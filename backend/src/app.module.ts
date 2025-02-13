@@ -8,6 +8,9 @@ import { HttpExceptionFilter } from 'libs/core/filters';
 
 import { CampagneModule } from './campagne/campagne.module';
 import { AuthModule } from './auth/auth.module';
+import { VoteModule } from './vote/vote.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -15,12 +18,17 @@ import { AuthModule } from './auth/auth.module';
       isGlobal: true,
       envFilePath: '../.env',
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'public'),
+      serveRoot: '/public',
+    }),
     DatabaseModule,
     JwtModule,
 
     // Routes
     AuthModule,
     CampagneModule,
+    VoteModule,
   ],
   controllers: [],
   providers: [

@@ -15,7 +15,7 @@ export class Vote {
   login!: string;
 
   @prop({ ref: () => Campagne, required: true })
-  campagne!: Campagne;
+  campagneId!: Campagne;
 }
 
 export type VoteModelType = ReturnModelType<typeof Vote>;

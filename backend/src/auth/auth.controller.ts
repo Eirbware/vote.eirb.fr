@@ -26,6 +26,6 @@ export class AuthController {
     return {
       login: req.login,
       userData: req.userData,
-    };
+    }; // TODO: also return if the user is an admin by qweerying the collections 'admins' with req.login
   }
 }

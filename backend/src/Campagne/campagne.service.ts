@@ -18,9 +18,11 @@ export class CampagneService {
     return CampagneModel.find({
       openVoteDate: { $lt: new Date() },
       closeVoteDate: { $gt: new Date() },
-    }).populate({
-      path: 'lists',
-      select: '-votesCount',
-    });
+    })
+      .populate({
+        path: 'lists',
+        select: '-votesCount',
+      })
+      .sort({ closeVoteDate: 1 });
   }
 }
