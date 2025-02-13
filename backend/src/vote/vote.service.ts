@@ -15,6 +15,11 @@ export class VoteService {
   }
 
   async voteFor(listId: string, campagneId: string, login: string) {
+    const vote = await VoteModel.findOne({ login, campagneId });
+    if (vote) {
+      return { success: false };
+    }
+
     await VoteModel.create({ login, campagneId });
     await ListModel.updateOne({ _id: listId }, { $inc: { votesCount: 1 } });
     return { success: true };
