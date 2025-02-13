@@ -25,4 +25,10 @@ export class CampagneService {
       })
       .sort({ closeVoteDate: 1 });
   }
+
+  async getPreviousVote() {
+    return CampagneModel.find({
+      closeVoteDate: { $lt: new Date() },
+    }).populate('lists');
+  }
 }

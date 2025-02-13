@@ -24,4 +24,13 @@ export class CampagneController {
     }
     return currentVote;
   }
+
+  @Get('previous-vote')
+  async getPreviousVote() {
+    const previousVote = await this.campagneService.getPreviousVote();
+    if (!previousVote) {
+      return [];
+    }
+    return previousVote;
+  }
 }
