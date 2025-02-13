@@ -93,9 +93,18 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
 
                   <hr className="my-2 border-gray-300" />
 
-                  <div className="flex flex-row items-center justify-around md:max-w-2xl mx-auto w-full">
+                  <div
+                    className={`flex flex-row items-center justify-around md:max-w-2xl mx-auto w-full ${
+                      campagne.lists.length >= 3 ? 'gap-2' : 'gap-4'
+                    } ${campagne.lists.length > 3 ? 'flex-wrap' : ''}`}
+                  >
                     {(campagne.lists as IList[]).map(
                       (list: IList, index: number) => {
+                        const logoSizeClass =
+                          (campagne.lists as IList[]).length >= 3
+                            ? 'w-12 h-12 md:w-16 md:h-16'
+                            : 'w-16 h-16';
+
                         return (
                           <React.Fragment key={list._id}>
                             <div className="flex flex-col gap-1">
@@ -108,7 +117,7 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
                                 <img
                                   src={`http://localhost:3000/public/logos/${list.filename}`}
                                   alt={list.name}
-                                  className="w-16 h-16 object-cover rounded-full transition-transform duration-200 hover:scale-105"
+                                  className={`object-cover rounded-full transition-transform duration-200 hover:scale-105 ${logoSizeClass}`}
                                 />
                                 <span className="text-center flex flex-row gap-1 justify-center hover:underline mt-1 ml-3">
                                   {list.trigram}
@@ -121,7 +130,9 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
                               </a>
                             </div>
                             {index < (campagne.lists as IList[]).length - 1 && (
-                              <span className="text-xl font-semibold">VS</span>
+                              <span className="text-lg md:text-xl font-semibold">
+                                VS
+                              </span>
                             )}
                           </React.Fragment>
                         );
