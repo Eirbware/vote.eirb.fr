@@ -8,9 +8,10 @@ import VoteIcon from '@/assets/icons/vote.svg';
 
 interface CurrentVotesProps {
   currentVotes: ICampagne[];
+  setVote: React.Dispatch<React.SetStateAction<ICampagne | null>>;
 }
 
-export const CurrentVotes = ({ currentVotes }: CurrentVotesProps) => {
+export const CurrentVotes = ({ currentVotes, setVote }: CurrentVotesProps) => {
   const today = new Date();
 
   const getRemainingDays = (endDate: Date) => {
@@ -43,7 +44,9 @@ export const CurrentVotes = ({ currentVotes }: CurrentVotesProps) => {
     <>
       {currentVotes && currentVotes.length > 0 && (
         <div>
-          <h1 className="text-2xl font-semibold my-4">Les votes en cours</h1>
+          <h1 className="text-2xl font-semibold my-4 md:text-center">
+            Les votes en cours
+          </h1>
           <div>
             {currentVotes.map((campagne) => {
               const progress = getProgress(
@@ -119,7 +122,7 @@ export const CurrentVotes = ({ currentVotes }: CurrentVotesProps) => {
                                 className="flex flex-col items-center"
                               >
                                 <img
-                                  src={`/logos/lists/${list.filename}`}
+                                  src={`http://localhost:3000/public/logos/${list.filename}`}
                                   alt={list.name}
                                   className="w-16 h-16 object-cover rounded-full transition-transform duration-200 hover:scale-105"
                                 />
@@ -137,7 +140,10 @@ export const CurrentVotes = ({ currentVotes }: CurrentVotesProps) => {
                     )}
                   </div>
                   <hr className="my-2 border-gray-300" />
-                  <button className="w-fit mx-auto">
+                  <button
+                    className="w-fit mx-auto"
+                    onClick={() => setVote(campagne)}
+                  >
                     <div className="flex flex-row justify-center items-center gap-2 bg-bde-gold px-4 py-2 rounded-lg text-lg font-semibold">
                       <img src={VoteIcon} alt="Logout" className="h-5 w-5" />
                       Exprimer mon vote

@@ -37,7 +37,9 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
     <>
       {upcommingVotes && upcommingVotes.length > 0 && (
         <div>
-          <h1 className="text-2xl font-semibold my-4">Les prochains votes</h1>
+          <h1 className="text-2xl font-semibold my-4  md:text-center">
+            Les prochains votes
+          </h1>
           <div>
             {upcommingVotes.map((campagne) => {
               const daysBeforeVote = Math.floor(
@@ -104,7 +106,7 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
                                 className="flex flex-col items-center"
                               >
                                 <img
-                                  src={`/logos/lists/${list.filename}`}
+                                  src={`http://localhost:3000/public/logos/${list.filename}`}
                                   alt={list.name}
                                   className="w-16 h-16 object-cover rounded-full transition-transform duration-200 hover:scale-105"
                                 />

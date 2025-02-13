@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { UpcommingVotes, NoVotes, CurrentVotes } from '@components/Vote';
+import {
+  UpcommingVotes,
+  NoVotes,
+  CurrentVotes,
+  VoteComponent,
+} from '@components/Vote';
 import { ICampagne } from '@/models';
 import { useFetchApi } from '@/utils';
 
@@ -12,6 +17,8 @@ export const Vote = () => {
     upcommingVotes: [],
     currentVotes: [],
   });
+
+  const [selectedVote, setSelectedVote] = useState<ICampagne | null>(null);
 
   const { fetchApi } = useFetchApi();
 
@@ -49,16 +56,28 @@ export const Vote = () => {
 
   return (
     <>
-      {upcommingOrCurrentVotes.currentVotes.length === 0 &&
-      upcommingOrCurrentVotes.upcommingVotes.length === 0 ? (
-        <NoVotes />
+      {selectedVote ? (
+        <VoteComponent
+          campagne={selectedVote}
+          onClose={() => setSelectedVote(null)}
+        />
       ) : (
-        <div className="flex flex-col gap-6">
-          <CurrentVotes currentVotes={upcommingOrCurrentVotes.currentVotes} />
-          <UpcommingVotes
-            upcommingVotes={upcommingOrCurrentVotes.upcommingVotes}
-          />
-        </div>
+        <>
+          {upcommingOrCurrentVotes.currentVotes.length === 0 &&
+          upcommingOrCurrentVotes.upcommingVotes.length === 0 ? (
+            <NoVotes />
+          ) : (
+            <div className="flex flex-col gap-6">
+              <CurrentVotes
+                currentVotes={upcommingOrCurrentVotes.currentVotes}
+                setVote={setSelectedVote}
+              />
+              <UpcommingVotes
+                upcommingVotes={upcommingOrCurrentVotes.upcommingVotes}
+              />
+            </div>
+          )}
+        </>
       )}
     </>
   );
