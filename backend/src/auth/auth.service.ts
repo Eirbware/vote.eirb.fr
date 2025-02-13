@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import axios from 'axios';
 import { CASResponse, APIError } from 'libs/core/models';
+import { AdminModel } from 'libs/database/models/admin.model';
 
 @Injectable()
 export class AuthService {
@@ -47,5 +48,10 @@ export class AuthService {
         lastName: userData.attributes.nom.join(' '),
       }),
     };
+  }
+
+  async isAdmin(login: string) {
+    const admin = await AdminModel.findOne({ login });
+    return !!admin;
   }
 }

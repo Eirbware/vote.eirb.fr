@@ -23,9 +23,16 @@ export class AuthController {
   @Get('me')
   @UseGuards(AuthGuard)
   me(@Req() req: AuthenticatedRequest) {
+    // TODO: Uncomment this line when the admin guard is implemented
+    // return {
+    //   login: req.login,
+    //   admin: this.authService.isAdmin(req.login),
+    //   userData: req.userData,
+    // };
     return {
       login: req.login,
+      admin: false,
       userData: req.userData,
-    }; // TODO: also return if the user is an admin by qweerying the collections 'admins' with req.login
+    };
   }
 }
