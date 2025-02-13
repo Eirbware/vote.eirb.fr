@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { Vote, Results, Login } from '@/pages';
 import { Layout } from './Layout';
 import ProtectedRoute from './ProtectedRoute';
+import { ProtectedAdminRoute } from './ProtectedAdminRoute';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: 'results',
         element: <Results />,
+      },
+      {
+        path: 'admin',
+        element: <ProtectedAdminRoute />,
       },
     ],
   },

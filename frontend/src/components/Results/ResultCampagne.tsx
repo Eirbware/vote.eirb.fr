@@ -25,20 +25,20 @@ export const ResultCampagne = ({ campagne }: ResultCampagneProps) => {
       <h2 className="text-2xl font-bold mb-2">{campagne.desc}</h2>
       <div className="text-gray-600 mb-4">
         <p>
-          <span className="font-semibold">Type:</span> {campagne.type}
+          <span className="font-semibold">Type :</span> {campagne.type}
         </p>
         <p>
-          <span className="font-semibold">École:</span> {campagne.school}
+          <span className="font-semibold">École :</span> {campagne.school}
         </p>
       </div>
 
       <div className="grid grid-cols-2 gap-4 mb-4">
         <p className="text-gray-600">
-          <span className="font-semibold">Début:</span>{' '}
+          <span className="font-semibold">Début :</span>{' '}
           {formatDate(campagne.startDate)}
         </p>
         <p className="text-gray-600">
-          <span className="font-semibold">Fin:</span>{' '}
+          <span className="font-semibold">Fin :</span>{' '}
           {formatDate(campagne.endDate)}
         </p>
       </div>
