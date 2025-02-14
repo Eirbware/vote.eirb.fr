@@ -1,12 +1,12 @@
 [
   {
-    "desc": "Campagnes BDE 2026",
+    "desc": "Upcomming seed DB votes",
     "school": "Enseirb-Matmeca",
     "type": "BDE",
     "startDate": "2023-01-15",
     "endDate": "2023-02-01",
-    "openVoteDate": "2023-02-7",
-    "closeVoteDate": "2023-02-13",
+    "openVoteDate": "2025-02-20",
+    "closeVoteDate": "2025-02-23",
     "lists": []
   }
 ]
