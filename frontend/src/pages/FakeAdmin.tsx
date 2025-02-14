@@ -157,6 +157,11 @@ export const FakeAdmin = () => {
   return (
     <div className="p-10">
       <h1 className="text-center text-3xl">Admin</h1>
+
+      {currentVote.length === 0 && (
+        <h2 className="text-center text-xl my-10">Aucuns votes en cours</h2>
+      )}
+
       {currentVote.map((campagne) => {
         const lists = campagne.lists as IList[];
         if (!lists || lists.length === 0) return null;
