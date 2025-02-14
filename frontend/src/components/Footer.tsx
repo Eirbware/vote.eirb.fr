@@ -55,6 +55,7 @@ export const Footer = () => {
 
         <div className=" text-sm text-left text-gray-600">
           <p>Coryright © {new Date().getFullYear()} BDE et Eirbware</p>
+          <p>Fait avec amour par le respo web BDE 2024</p>
         </div>
       </div>
     </div>
