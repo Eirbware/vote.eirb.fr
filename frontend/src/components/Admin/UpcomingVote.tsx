@@ -8,8 +8,6 @@ interface UpcomingVoteProps {
 }
 
 export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
-  console.log(campagne);
-
   const formatDate = (dateStr: Date | string): string =>
     new Date(dateStr).toLocaleDateString('fr-FR', {
       day: 'numeric',
@@ -38,6 +36,9 @@ export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
   const [openVoteDate, setOpenVoteDate] = useState(
     new Date(campagne.openVoteDate).toISOString().slice(0, 10)
   );
+  const [closeVoteDate, setCloseVoteDate] = useState(
+    new Date(campagne.closeVoteDate).toISOString().slice(0, 10)
+  );
   const [school, setSchool] = useState(campagne.school);
   const [endDate, setEndDate] = useState(
     new Date(campagne.endDate).toISOString().slice(0, 10)
@@ -53,6 +54,9 @@ export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
   useEffect(() => {
     setDesc(campagne.desc);
     setOpenVoteDate(new Date(campagne.openVoteDate).toISOString().slice(0, 10));
+    setCloseVoteDate(
+      new Date(campagne.closeVoteDate).toISOString().slice(0, 10)
+    );
     setSchool(campagne.school);
     setEndDate(new Date(campagne.endDate).toISOString().slice(0, 10));
     const campaignStartTime = new Date(campagne.startDate).getTime();
@@ -67,6 +71,7 @@ export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
     const updatedCampagne: Partial<ICampagne> = {
       desc,
       openVoteDate: new Date(openVoteDate),
+      closeVoteDate: new Date(closeVoteDate),
       school,
       endDate: new Date(endDate),
       ...(startDate && { startDate: new Date(startDate) }),
@@ -76,7 +81,7 @@ export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 p-6 border rounded-lg shadow-lg bg-white max-w-4xl w-full md:w-fit h-fit mx-auto">
+    <div className="flex flex-col gap-4 p-6 border rounded-lg shadow-lg bg-white max-w-4xl min-w-xs w-full md:w-fit h-fit mx-auto">
       <div className="flex flex-col gap-2 items-center w-full">
         {isEditing ? (
           <input
@@ -88,7 +93,7 @@ export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
         ) : (
           <h2 className="text-xl font-semibold">{campagne.desc}</h2>
         )}
-        <div className="flex flex-row w-full justify-around">
+        <div className="flex flex-row w-full justify-between">
           <p className="flex flex-row items-center gap-2">
             <img src={LocationIcon} alt="location icon" className="w-6 h-6" />
             {isEditing ? (
@@ -120,6 +125,8 @@ export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
       <div className="flex flex-col items-center">
         <p className="text-xl">Début des votes :</p>
         <p className="text-md">{formatDate(campagne.openVoteDate)}</p>
+        <p className="text-md">Fin des votes :</p>
+        <p className="text-md">{formatDate(campagne.closeVoteDate)}</p>
       </div>
       <div className="flex flex-wrap justify-center gap-4">
         {lists.map((list, index) => (
@@ -146,6 +153,15 @@ export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
               type="date"
               value={openVoteDate}
               onChange={(e) => setOpenVoteDate(e.target.value)}
+              className="border rounded p-1"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="font-medium">Fermeture des votes :</label>
+            <input
+              type="date"
+              value={closeVoteDate}
+              onChange={(e) => setCloseVoteDate(e.target.value)}
               className="border rounded p-1"
             />
           </div>
