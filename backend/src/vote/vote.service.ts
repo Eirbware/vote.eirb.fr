@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { VoteModel } from 'libs/database/models/vote.model';
 import { ListModel } from 'libs/database/models/list.model';
+import { CampagneModel } from 'libs/database/models/campagne.model';
 
 @Injectable()
 export class VoteService {
@@ -17,6 +18,11 @@ export class VoteService {
   async voteFor(listId: string, campagneId: string, login: string) {
     const vote = await VoteModel.findOne({ login, campagneId });
     if (vote) {
+      return { success: false };
+    }
+
+    const campagne = await CampagneModel.findById(campagneId);
+    if (!campagne || campagne.closeVoteDate < new Date()) {
       return { success: false };
     }
 
