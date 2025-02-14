@@ -73,7 +73,7 @@ export const Admin = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 flex-1">
           <h1 className="text-center text-xl">Créer une campagne</h1>
           {/* Formulaire de création de campagne à ajouter ici */}
         </div>

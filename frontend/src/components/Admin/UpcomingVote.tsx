@@ -14,6 +14,13 @@ export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
       month: 'short',
     });
 
+  const formatDateFull = (dateStr: Date | string): string =>
+    new Date(dateStr).toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+
   const lists = campagne.lists as IList[];
   const getTimeProgress = (
     startDate: Date | string,
@@ -124,9 +131,9 @@ export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
       </div>
       <div className="flex flex-col items-center">
         <p className="text-xl">Début des votes :</p>
-        <p className="text-md">{formatDate(campagne.openVoteDate)}</p>
+        <p className="text-md">{formatDateFull(campagne.openVoteDate)}</p>
         <p className="text-md">Fin des votes :</p>
-        <p className="text-md">{formatDate(campagne.closeVoteDate)}</p>
+        <p className="text-md">{formatDateFull(campagne.closeVoteDate)}</p>
       </div>
       <div className="flex flex-wrap justify-center gap-4">
         {lists.map((list, index) => (
