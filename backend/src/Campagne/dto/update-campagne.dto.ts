@@ -10,6 +10,10 @@ export class UpdateCampagneDto {
   openVoteDate?: string;
 
   @IsOptional()
+  @IsDateString({}, { message: 'CAMPAGNE/UPDATE_INVALID_CLOSE_VOYE_DATE' })
+  closeVoteDate?: string;
+
+  @IsOptional()
   @IsNotEmpty({ message: 'CAMPAGNE/UPDATE_MISSING_SCHOOL' })
   school?: string;
 
