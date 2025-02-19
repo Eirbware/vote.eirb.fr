@@ -37,8 +37,6 @@ export class AuthService {
   async loginCas(ticket: string, redirectUrl: string) {
     const userData = await this.fetchCasData(ticket, redirectUrl);
 
-    console.log(userData);
-
     if (!userData.attributes.profil.includes('student')) {
       throw new APIError('CAS/NOT_STUDENT', 403);
     }

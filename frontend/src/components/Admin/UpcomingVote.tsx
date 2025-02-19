@@ -119,8 +119,14 @@ export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
       </div>
       <div className="flex flex-col items-center">
         <p>
-          Date : {formatDate(campagne.startDate)} -{' '}
-          {formatDate(campagne.endDate)}
+          {new Date(campagne.startDate).getFullYear() ===
+          new Date().getFullYear()
+            ? formatDate(campagne.startDate)
+            : formatDateFull(campagne.startDate)}
+          -{' '}
+          {new Date(campagne.endDate).getFullYear() === new Date().getFullYear()
+            ? formatDate(campagne.endDate)
+            : formatDateFull(campagne.endDate)}
         </p>
         <div className="w-full bg-gray-200 rounded-full h-3">
           <div

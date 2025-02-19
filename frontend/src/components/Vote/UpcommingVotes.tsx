@@ -144,7 +144,7 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
 
                   <p className="flex flex-row gap-2 items-center text-md">
                     <img src={InfoIcon} className="h-8 w-8" />
-                    {daysBeforeVote} jours avant l'ouverture des votes
+                    {daysBeforeVote + 1} jours avant l'ouverture des votes
                   </p>
                 </div>
               );
