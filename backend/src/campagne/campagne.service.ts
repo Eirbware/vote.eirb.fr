@@ -10,7 +10,7 @@ import { CreateCampagneDto } from './dto/create-campagne.dto';
 export class CampagneService {
   async getUpcomingVote() {
     return CampagneModel.find({
-      startDate: { $lt: new Date() },
+      startDate: { $lte: new Date() },
       openVoteDate: { $gt: new Date() },
     }).populate({
       path: 'lists',
@@ -19,9 +19,13 @@ export class CampagneService {
   }
 
   async getCurrentVote() {
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+    const todayEnd = new Date();
+    todayEnd.setHours(23, 59, 59, 999);
     return CampagneModel.find({
-      openVoteDate: { $lt: new Date() },
-      closeVoteDate: { $gt: new Date() },
+      openVoteDate: { $lte: todayEnd },
+      closeVoteDate: { $gte: todayStart },
     })
       .populate({
         path: 'lists',
@@ -31,17 +35,23 @@ export class CampagneService {
   }
 
   async getPreviousVote() {
+    const threeDaysAgo = new Date();
+    threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
     return CampagneModel.find({
       closeVoteDate: {
-        $lt: new Date(new Date().setDate(new Date().getDate() + 3)),
+        $lt: threeDaysAgo,
       },
     }).populate('lists');
   }
 
   async getCurrentVoteWithResult() {
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+    const todayEnd = new Date();
+    todayEnd.setHours(23, 59, 59, 999);
     return CampagneModel.find({
-      openVoteDate: { $lt: new Date() },
-      closeVoteDate: { $gt: new Date() },
+      openVoteDate: { $lte: todayEnd },
+      closeVoteDate: { $gte: todayStart },
     })
       .populate('lists')
       .sort({ closeVoteDate: 1 });
