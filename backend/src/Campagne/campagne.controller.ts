@@ -1,8 +1,21 @@
-import { Body, Controller, Get, Param, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { CampagneService } from './campagne.service';
 import { AuthGuard, AdminGuard } from 'libs/core/guards';
 import { UpdateCampagneDto } from './dto/update-campagne.dto';
 import { APIError } from 'libs/core/models';
+import { CreateCampagneDto } from './dto/create-campagne.dto';
+import { AnyFilesInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { join } from 'path';
 
 @Controller('campagnes')
 @UseGuards(AuthGuard)
@@ -71,5 +84,22 @@ export class CampagneController {
       throw new APIError('CAMPAGNE/NOT_FOUND', 404);
     }
     return updatedCampagne;
+  }
+
+  @Post('create')
+  @UseGuards(AdminGuard)
+  @UseInterceptors(
+    AnyFilesInterceptor({
+      storage: diskStorage({
+        destination: join(__dirname, '..', '..', '..', 'public', 'logos'),
+        filename: (req, file, cb) => {
+          cb(null, file.originalname);
+        },
+      }),
+      limits: { fileSize: 5 * 1024 * 1024 },
+    }),
+  )
+  async createCampagne(@Body() createCampagneDto: CreateCampagneDto) {
+    return await this.campagneService.createCampagne(createCampagneDto);
   }
 }

@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
 import { CampagneModel } from 'libs/database/models/campagne.model';
+import { ListModel } from 'libs/database/models/list.model';
 import { UpdateCampagneDto } from './dto/update-campagne.dto';
 import { APIError } from 'libs/core/models';
+import { CreateCampagneDto } from './dto/create-campagne.dto';
 
 @Injectable()
 export class CampagneService {
@@ -70,5 +72,28 @@ export class CampagneService {
     Object.assign(campagne, updateCampagneDto);
     await campagne.save();
     return campagne.populate('lists');
+  }
+
+  async createCampagne(createCampagneDto: CreateCampagneDto) {
+    const listIds: string[] = [];
+
+    try {
+      for (const list of JSON.parse(createCampagneDto.lists || '[]')) {
+        const newList = new ListModel(list);
+        await newList.save();
+        listIds.push(newList._id.toString());
+      }
+
+      const newCampagne = new CampagneModel({
+        ...createCampagneDto,
+        lists: listIds,
+      });
+
+      await newCampagne.save();
+      return newCampagne.populate('lists');
+    } catch (error) {
+      await Promise.all(listIds.map((id) => ListModel.deleteOne({ _id: id })));
+      throw error;
+    }
   }
 }

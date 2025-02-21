@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { VoteModule } from './vote/vote.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -21,6 +22,9 @@ import { join } from 'path';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'public'),
       serveRoot: '/public',
+    }),
+    MulterModule.register({
+      dest: join(__dirname, '..', '..', 'public', 'logos'),
     }),
     DatabaseModule,
     JwtModule,
