@@ -1,0 +1,5 @@
+include:
+  - path:
+      - docker-compose.db.yaml
+      - docker-compose.api.yaml
+      - docker-compose.www.yaml

@@ -82,7 +82,7 @@ Do not forget to start the database container before deploying the backend and f
 Build and run the backend using Docker Compose for production:
 
 ```shell
-docker-compose -f ./docker-compose.adpi.yaml up -d
+docker-compose -f ./docker-compose.api.yaml up -d
 ```
 
 ### Frontend Production
