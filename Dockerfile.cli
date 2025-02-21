@@ -1,0 +1,13 @@
+FROM node:22
+
+WORKDIR /app
+
+COPY backend/package.json backend/yarn.lock ./
+
+RUN yarn install --frozen-lockfile
+
+COPY backend .
+
+COPY .env ../
+
+CMD ["yarn", "cli:start", "seed-admin"]

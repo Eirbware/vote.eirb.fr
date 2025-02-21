@@ -18,14 +18,20 @@
 docker-compose up -f ./docker-compose.db.yaml up -d
 ```
 
-### Starting the backend
+### Starting the backend in production mode
 
 ```
 yarn && yarn run start
 ```
 
-### Starting the frontend
+### Starting the frontend in production mode
 
 ```
 yarn && yarn dev
+```
+
+### PODUCTION MODE BACKEND
+
+```shell
+docker compose -f docker-compose.api.yaml up --build -d
 ```

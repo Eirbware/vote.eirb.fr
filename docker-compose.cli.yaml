@@ -1,0 +1,8 @@
+services:
+  vote-eirb-fr-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile.cli
+    container_name: vote-eirb-fr-cli
+    env_file:
+      - .env

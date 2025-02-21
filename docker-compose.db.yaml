@@ -1,5 +1,5 @@
 services:
-  mongodb:
+  vote-eirb-fr-db:
     build:
       context: .
       dockerfile: Dockerfile.database
