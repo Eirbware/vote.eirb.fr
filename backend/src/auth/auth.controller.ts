@@ -22,10 +22,10 @@ export class AuthController {
 
   @Get('me')
   @UseGuards(AuthGuard)
-  me(@Req() req: AuthenticatedRequest) {
+  async me(@Req() req: AuthenticatedRequest) {
     return {
       login: req.login,
-      admin: this.authService.isAdmin(req.login),
+      admin: await this.authService.isAdmin(req.login),
       userData: req.userData,
     };
   }
