@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
+import { redirect } from 'react-router-dom';
 
 import { AuthContext } from '@context/auth.context';
-import { redirect } from 'react-router-dom';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [jwt, setJwtState] = useState<string | null>(() => {

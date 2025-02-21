@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { ICampagne } from '@/models';
 import { useFetchApi } from '@/utils';
 import { CurrentVotes } from '@/components/Admin/CurrentVotes';

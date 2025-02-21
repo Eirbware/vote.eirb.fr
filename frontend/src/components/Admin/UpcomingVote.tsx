@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+
 import { ICampagne, IList } from '@/models';
+
 import LocationIcon from '@/assets/icons/location.svg';
 
 interface UpcomingVoteProps {

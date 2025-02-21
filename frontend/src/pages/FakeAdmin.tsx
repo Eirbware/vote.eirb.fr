@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Line } from 'react-chartjs-2';
+
 import { ICampagne, IList } from '@/models';
 import { useFetchApi } from '@/utils';
-import { Line } from 'react-chartjs-2';
+
 import {
   Chart as ChartJS,
   CategoryScale,
