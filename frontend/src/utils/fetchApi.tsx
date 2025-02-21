@@ -15,20 +15,32 @@ export const useFetchApi = () => {
       route: string,
       method = 'GET',
       auth = true,
-      body?: object,
+      body?: unknown,
       headers?: object
     ) => {
       const url = `${import.meta.env.VITE_API_URL}${route}`;
-      const defaultHeaders: HeadersInit = {
-        'Content-Type': 'application/json',
-        ...(auth && jwt ? { Authorization: `Bearer ${jwt}` } : {}),
-        ...headers,
-      };
+
+      let defaultHeaders: HeadersInit = {};
+      if (!(body instanceof FormData)) {
+        defaultHeaders = {
+          'Content-Type': 'application/json',
+        };
+      }
+
+      if (auth && jwt) {
+        defaultHeaders = { ...defaultHeaders, Authorization: `Bearer ${jwt}` };
+      }
+
+      defaultHeaders = { ...defaultHeaders, ...headers };
 
       const options: RequestInit = {
         method,
         headers: defaultHeaders,
-        ...(body ? { body: JSON.stringify(body) } : {}),
+        ...(body
+          ? {
+              body: body instanceof FormData ? body : JSON.stringify(body),
+            }
+          : {}),
       };
 
       try {

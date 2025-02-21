@@ -3,6 +3,7 @@ import { ICampagne } from '@/models';
 import { useFetchApi } from '@/utils';
 import { CurrentVotes } from '@/components/Admin/CurrentVotes';
 import { UpcomingVote } from '@components/Admin/UpcomingVote';
+import { CreateCampagne } from '@/components/Admin/CreateCampagne';
 
 export const Admin = () => {
   const [currentVotes, setCurrentVotes] = useState<ICampagne[]>([]);
@@ -75,7 +76,7 @@ export const Admin = () => {
         </div>
         <div className="flex flex-col gap-4 flex-1">
           <h1 className="text-center text-xl">Créer une campagne</h1>
-          {/* Formulaire de création de campagne à ajouter ici */}
+          <CreateCampagne />
         </div>
       </div>
     </div>
