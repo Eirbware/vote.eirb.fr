@@ -7,8 +7,6 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    ports:
-      - '${API_PORT}:3000'
     environment:
       NODE_ENV: production
     command: yarn start:prod
