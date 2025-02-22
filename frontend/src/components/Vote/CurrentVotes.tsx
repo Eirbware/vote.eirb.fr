@@ -81,8 +81,11 @@ export const CurrentVotes = ({ currentVotes, setVote }: CurrentVotesProps) => {
                         src={InfoIcon}
                         className="h-8 w-8 bg-bde-gold rounded-full"
                       />
-                      {getRemainingDays(campagne.closeVoteDate) + 1} jours avant
-                      la fermeture des votes
+                      {getRemainingDays(campagne.closeVoteDate) + 1 === 0
+                        ? "Les votes se ferment aujourd'hui à minuit!"
+                        : getRemainingDays(campagne.closeVoteDate) +
+                          1 +
+                          ' jours avant la fermeture des votes !'}
                     </p>
                   </div>
 
