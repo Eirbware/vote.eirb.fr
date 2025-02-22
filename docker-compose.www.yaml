@@ -1,0 +1,11 @@
+services:
+  vote-eirb-fr-www:
+    build:
+      context: .
+      dockerfile: Dockerfile.www
+    container_name: vote-eirb-fr-www
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - '${STORE_PORT:-5173}:80'

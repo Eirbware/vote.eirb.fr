@@ -1,0 +1,14 @@
+services:
+  vote-eirb-fr-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: vote-eirb-fr-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+    command: yarn start:prod
+    volumes:
+      - ./backend/public:/app/public

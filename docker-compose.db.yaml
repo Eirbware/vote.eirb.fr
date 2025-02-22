@@ -1,0 +1,19 @@
+services:
+  vote-eirb-fr-db:
+    build:
+      context: .
+      dockerfile: Dockerfile.database
+    image: mongo:8.0
+    container_name: vote-eirb-fr-db
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE_NAME}
+    volumes:
+      - vote-eirb-fr-data:/data/db
+
+volumes:
+  vote-eirb-fr-data:

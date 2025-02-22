@@ -1,1 +1,4 @@
-private/config.php
+.env
+.DS_Store
+
+backend/public/logos/*
