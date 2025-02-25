@@ -82,7 +82,7 @@ export const CurrentVotes = ({ campagne }: CurrentVotesProps) => {
             className="flex items-center gap-4 p-3 border rounded-lg"
           >
             <img
-              src={`http://localhost:3000/public/logos/${list.filename}`}
+              src={`${import.meta.env.VITE_API_URL}public/logos/${list.filename}`}
               alt={list.name}
               className="w-16 h-16 object-cover rounded-full"
             />

@@ -55,7 +55,7 @@ export const ResultCampagne = ({ campagne }: ResultCampagneProps) => {
                 className="flex flex-col items-center"
               >
                 <img
-                  src={`http://localhost:3000/public/logos/${list.filename}`}
+                  src={`${import.meta.env.VITE_API_URL}public/logos/${list.filename}`}
                   alt={list.name}
                   className="w-16 h-16 object-cover rounded-full border border-gray-200 transition-transform duration-200 hover:scale-105"
                 />

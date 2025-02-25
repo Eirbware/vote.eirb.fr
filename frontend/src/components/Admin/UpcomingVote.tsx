@@ -150,7 +150,7 @@ export const UpcomingVote = ({ campagne, onSave }: UpcomingVoteProps) => {
             className="flex flex-col items-center"
           >
             <img
-              src={`http://localhost:3000/public/logos/${
+              src={`${import.meta.env.VITE_API_URL}public/logos/${
                 list.filename || 'defaultLogo.svg'
               }`}
               alt={list.name}

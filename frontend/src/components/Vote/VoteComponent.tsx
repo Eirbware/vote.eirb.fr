@@ -121,7 +121,7 @@ export const VoteComponent = ({ campagne, onClose }: VoteComponentProps) => {
                         className="flex flex-col gap-2 items-center transform transition-transform duration-300 hover:scale-110"
                       >
                         <img
-                          src={`http://localhost:3000/public/logos/${list.filename}`}
+                          src={`${import.meta.env.VITE_API_URL}public/logos/${list.filename}`}
                           alt={list.name}
                           className="h-20 w-20 cursor-pointer"
                         />
