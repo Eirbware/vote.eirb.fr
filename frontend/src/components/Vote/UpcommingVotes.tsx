@@ -115,7 +115,7 @@ export const UpcommingVotes = ({ upcommingVotes }: UpcommingVotesProps) => {
                                 className="flex flex-col items-center"
                               >
                                 <img
-                                  src={`http://localhost:3000/public/logos/${list.filename}`}
+                                  src={`https://vote.eirb.fr/api/public/logos/${list.filename}`}
                                   alt={list.name}
                                   className={`object-cover rounded-full transition-transform duration-200 hover:scale-105 ${logoSizeClass}`}
                                 />
