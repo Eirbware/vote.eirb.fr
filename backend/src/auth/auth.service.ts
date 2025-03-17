@@ -41,6 +41,10 @@ export class AuthService {
       throw new APIError('CAS/NOT_STUDENT', 403);
     }
 
+    if (!userData.attributes.ecole.includes('enseirb-matmeca')) {
+      throw new APIError('CAS/NOT_RIGHT_SCHOOL', 403);
+    }
+
     return {
       jwt: this.jwtService.sign({
         login: userData.user,
