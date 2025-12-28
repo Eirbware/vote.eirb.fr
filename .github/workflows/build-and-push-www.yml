@@ -1,0 +1,17 @@
+name: Build and push docker image
+
+on: 
+  push:
+    branches : [ "main" ]
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  buid-and-push:
+    uses: Eirbware/.github/.github/workflows/build-and-publish.yml@master
+    with:
+      file: "./Dockerfile"
+      image_name: ${{ github.repository }}-www
+    # registry_username and registry_api_key must be defined
+    secrets: inherit
