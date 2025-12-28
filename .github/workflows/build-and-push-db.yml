@@ -1,4 +1,4 @@
-name: Build and push www docker image
+name: Build and push db docker image
 
 on: 
   push:
