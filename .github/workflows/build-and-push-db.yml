@@ -11,7 +11,7 @@ jobs:
   buid-and-push:
     uses: Eirbware/.github/.github/workflows/build-and-publish.yml@master
     with:
-      file: "./Dockerfile.www"
-      image_name: ${{ github.repository }}-www
+      file: "./Dockerfile.db"
+      image_name: ${{ github.repository }}-db
     # registry_username and registry_api_key must be defined
     secrets: inherit
