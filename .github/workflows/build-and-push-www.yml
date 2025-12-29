@@ -11,25 +11,19 @@ jobs:
   create-env:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
       - name: Creates the .env file and puts the required text in it
         env:
           STORE_PORT: ${{ vars.STORE_PORT }}
           VITE_API_URL: ${{ vars.VITE_API_URL }}
         run: |
-          echo "STORE_PORT=$STORE_PORT" > .env
-          echo "VITE_API_URL=$VITE_API_URL" >> .env
-
-      - name: Check .env location
-        run: ls -Ra
+          echo "STORE_PORT=$STORE_PORT" > ${{ github.workspace }}/.env
+          echo "VITE_API_URL=$VITE_API_URL" >> ${{ github.workspace }}/.env
 
       - name: Upload the .env file
         uses: actions/upload-artifact@v4
         with:
           name: env_file
-          path: .env
+          path: ${{ github.workspace }}/.env
 
   build-and-push:
     needs: create-env
