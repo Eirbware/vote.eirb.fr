@@ -1,5 +1,35 @@
-include:
-  - path:
-      - docker-compose.db.yaml
-      - docker-compose.api.yaml
-      - docker-compose.www.yaml
+sservices:
+  vote-eirb-fr-db:
+    image: registry.eirb.fr/eirbware/vote.eirb.fr-db:main
+    container_name: vote-eirb-fr-db
+    restart: unless-stopped
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE_NAME}
+    volumes:
+      - vote-eirb-fr-data:/data/db
+
+  vote-eirb-fr-www:
+    image: registry.eirb.fr/eirbware/vote.eirb.fr-www:main
+    container_name: vote-eirb-fr-www
+    restart: unless-stopped
+    ports:
+      - ${STORE_PORT:-5173}:80
+
+  vote-eirb-fr-api:
+    image: registry.eirb.fr/eirbware/vote.eirb.fr-api:main
+    container_name: vote-eirb-fr-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      MONGO_HOST: vote-eirb-fr-db
+      MONGO_PORT: 27017
+      JWT_SECRET: ${JWT_SECRET}
+    command: yarn start:prod
+    volumes:
+      - ./backend/public:/app/public
+
+volumes:
+  vote-eirb-fr-data:
+  
