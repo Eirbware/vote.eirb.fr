@@ -11,6 +11,9 @@ jobs:
   create-env:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
       - name: Creates the .env file and puts the required text in it
         env:
           STORE_PORT: ${{ vars.STORE_PORT }}
