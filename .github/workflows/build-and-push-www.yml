@@ -24,6 +24,7 @@ jobs:
         with:
           name: env_file
           path: ${{ github.workspace }}/.env
+          include-hidden-files: true
 
   build-and-push:
     needs: create-env
