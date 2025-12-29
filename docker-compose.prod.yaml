@@ -26,6 +26,9 @@ services:
       MONGO_HOST: vote-eirb-fr-db
       MONGO_PORT: 27017
       JWT_SECRET: ${JWT_SECRET}
+      MONGO_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_DATABASE_NAME: ${MONGO_DATABASE_NAME}
     command: yarn start:prod
 
 volumes:
