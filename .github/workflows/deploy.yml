@@ -55,7 +55,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ build-and-push-www, build-and-push-db, build-and-push-api ]
     steps: 
-      - name: "Portainer service Webhook"
-        uses: newarifrh/portainer-service-webhook@v1
-        with:
-          webhook_url: ${{ secrets.WEBHOOK_URL }}
+      - name: Trigger Portainer stack webhook
+        run: |
+          response=$(curl -X POST -w "%{http_code}" -o /dev/null -s ${{ secrets.PORTAINER_STACK_WEBHOOK }})
+          if [ "$response" -ne 204 ]; then
+            echo "Error: POST request failed with status code $response"
+            exit 1
+          fi
