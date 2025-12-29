@@ -1,4 +1,4 @@
-sservices:
+services:
   vote-eirb-fr-db:
     image: registry.eirb.fr/eirbware/vote.eirb.fr-db:main
     container_name: vote-eirb-fr-db
