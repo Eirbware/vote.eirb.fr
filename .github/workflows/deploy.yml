@@ -53,6 +53,6 @@ jobs:
 
   deploy:
     needs: [ build-and-push-www, build-and-push-db, build-and-push-api ]
-    uses: Eirbware/.github/.github/workflows/deploy-stack@master
+    uses: Eirbware/.github/.github/workflows/deploy-stack.yml@master
     # portainer_stack_webhook must be defined
     secrets: inherit
