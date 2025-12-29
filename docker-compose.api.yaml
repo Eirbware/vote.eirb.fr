@@ -10,5 +10,3 @@ services:
     environment:
       NODE_ENV: production
     command: yarn start:prod
-    volumes:
-      - ./backend/public:/app/public

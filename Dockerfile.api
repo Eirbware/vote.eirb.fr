@@ -22,6 +22,7 @@ WORKDIR /app
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/package.json /app/yarn.lock ./
+COPY --from=build /app/public /app/public
 
 EXPOSE 3000
 
