@@ -20,7 +20,7 @@ jobs:
           echo "VITE_API_URL=$VITE_API_URL" >> .env
 
       - name: Check .env location
-        run: ls -R
+        run: ls -Ra
 
       - name: Upload the .env file
         uses: actions/upload-artifact@v4
