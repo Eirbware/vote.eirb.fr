@@ -8,7 +8,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  buid-and-push:
+  build-and-push-db:
     uses: Eirbware/.github/.github/workflows/build-and-publish.yml@master
     with:
       file: "./Dockerfile.database"
