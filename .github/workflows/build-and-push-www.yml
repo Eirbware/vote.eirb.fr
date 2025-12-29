@@ -1,0 +1,36 @@
+name: Build and push www docker image
+
+on: 
+  push:
+    branches : [ "main" ]
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  create-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Creates the .env file and puts the required text in it
+        env:
+          STORE_PORT: ${{ vars.STORE_PORT }}
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+        run: |
+          echo "STORE_PORT=$STORE_PORT" > ./.env
+          echo "VITE_API_URL=$VITE_API_URL" >> ./.env
+
+      - name: Upload the .env file
+        uses: actions/upload-artifact@v4
+        with:
+          name: env_file
+          path: ./.env
+
+  build-and-push:
+    needs: create-env
+    uses: Eirbware/.github/.github/workflows/build-and-publish.yml@master
+    with:
+      file: "./Dockerfile.www"
+      image_name: ${{ github.repository }}-www
+      artifact_name: env_file
+    # registry_username and registry_api_key must be defined
+    secrets: inherit
