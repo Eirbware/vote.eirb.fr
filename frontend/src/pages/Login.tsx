@@ -15,56 +15,53 @@ export const Login = () => {
   const { setJwt } = useAuth();
   const navigate = useNavigate();
 
-  const CASLogin = () => {
+  const EirbConnectLogin = () => {
     const redirectUrl = window.location.href;
-    const serviceUrl = 'https://cas.serveur-bde.eirb.fr/';
-    const encodedUrl = encodeURIComponent(
-      `${serviceUrl}?token=${btoa(redirectUrl)}`
-    );
-    const authenticationCasUrl = `https://cas.bordeaux-inp.fr/login?service=${encodedUrl}`;
-    window.location.href = authenticationCasUrl;
+    const requestUrl = `${BACKEND_URL}auth/login?redirectUrl=${redirectUrl}`;
+    fetch(requestUrl).then((response) => {
+      response.json().then((result) => {
+        window.location.href = result.redirectUrl;
+        sessionStorage.setItem("code_verifier", result.code_verifier);
+        sessionStorage.setItem("state", result.state);
+      })
+    })
   };
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const ticket = urlParams.get('ticket');
+    const code_verifier = sessionStorage.getItem("code_verifier");
+    const state = sessionStorage.getItem("state");
 
-    if (ticket) {
-      window.history.replaceState({}, document.title, window.location.pathname);
-
-      const redirectUrl = window.location.href
-        .replace(`ticket=${ticket}`, '')
-        .replace('?&', '?')
-        .replace('&&', '&');
-
-      const fetchData = async () => {
-        try {
-          const response = await fetch(
-            `${BACKEND_URL}auth/login-cas?ticket=${ticket}&redirectUrl=${btoa(
-              redirectUrl
-            )}`,
-            { method: 'GET' }
-          );
-
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-
-          const result = await response.json();
-          setJwt(result.jwt);
-
-          navigate('/');
-        } catch {
-          setErrorOnLogin(true);
-
-          setTimeout(() => {
-            setErrorOnLogin(false);
-          }, 7000);
-        }
-      };
-
-      fetchData();
+    if (!state && !code_verifier){
+      return;
     }
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `${BACKEND_URL}auth/verify-login?currentUrl=${encodeURIComponent(window.location.href)}&code_verifier=${code_verifier}&state=${state}`
+        )
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        setJwt(result.jwt);
+
+        navigate('/');
+      } catch {
+        setErrorOnLogin(true);
+
+        setTimeout(() => {
+          setErrorOnLogin(false);
+        }, 7000);
+      }
+    };
+
+    fetchData();
+    sessionStorage.removeItem("code_verifier");
+    sessionStorage.removeItem("state");
+
+    return;
   }, [BACKEND_URL, setJwt, navigate]);
 
   return (
@@ -103,7 +100,7 @@ export const Login = () => {
           l'ensemble des sites pédagogiques.
         </p>
         <button
-          onClick={CASLogin}
+          onClick={EirbConnectLogin}
           className="my-4 flex items-center gap-2 bg-[#ffdd03] hover:bg-yellow-400 font-medium py-2 px-6 rounded-lg transition-all duration-300"
         >
           <img src={LogoINP} alt="Logo INP" className="h-6 w-auto" />

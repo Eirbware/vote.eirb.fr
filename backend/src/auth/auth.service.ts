@@ -1,58 +1,94 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import axios from 'axios';
-import { CASResponse, APIError } from 'libs/core/models';
+import { Configuration, discovery, randomPKCECodeVerifier, calculatePKCECodeChallenge, randomState, buildAuthorizationUrl, authorizationCodeGrant, fetchUserInfo } from 'openid-client';
+
+import { APIError } from 'libs/core/models';
 import { AdminModel } from 'libs/database/models/admin.model';
 
 @Injectable()
 export class AuthService {
   constructor(private jwtService: JwtService) {}
 
-  private async fetchCasData(ticket: string, redirectUrl: string) {
-    const CAS_PROXY_URL = 'https://cas.serveur-bde.eirb.fr/?token=';
-    const serviceUrl = `${CAS_PROXY_URL}${redirectUrl}`;
-    const casUrl = `https://cas.bordeaux-inp.fr/serviceValidate?service=${encodeURIComponent(
-      serviceUrl,
-    )}&ticket=${ticket}&format=json`;
+	async login(redirectUrl: string) {
+		const issuerUrlString: string | undefined = process.env.OIDC_ISSUER
+		const clientID: string | undefined = process.env.OIDC_CLIENT_ID
+		const clientSecret: string | undefined = process.env.OIDC_CLIENT_SECRET
 
-    try {
-      const response = await axios.get<CASResponse>(casUrl);
+		if (issuerUrlString == undefined || clientID == undefined || clientSecret == undefined){
+			throw new APIError("OIDC/ENV_NOT_SET");
+		}
 
-      const data: CASResponse = response.data;
+		const issuer: URL = new URL(issuerUrlString);
+		const scope: string = "openid profile email"
 
-      if (!data.serviceResponse.authenticationSuccess) {
-        throw new APIError('CAS/LOGIN_FAILED', 401);
-      }
+		const config: Configuration = await discovery(
+			issuer,
+			clientID,
+			clientSecret,
+		)
 
-      return data.serviceResponse.authenticationSuccess;
-    } catch (error) {
-      if (error instanceof APIError) {
-        throw error;
-      }
+		const code_verifier: string = randomPKCECodeVerifier();
+		const code_challenge: string = await calculatePKCECodeChallenge(code_verifier);
+		let state: string = ""
 
-      throw new APIError('CAS/REQUEST_FAILED', 500, error);
-    }
-  }
+		const parameters: Record<string, string> = {
+			redirect_uri: redirectUrl,
+			scope, 
+			code_challenge,
+			code_challenge_method: 'S256',
+		}
 
-  async loginCas(ticket: string, redirectUrl: string) {
-    const userData = await this.fetchCasData(ticket, redirectUrl);
+		if (!config.serverMetadata().supportsPKCE()){
+			state = randomState()
+			parameters.state = state
+		}
 
-    if (!userData.attributes.profil.includes('student')) {
-      throw new APIError('CAS/NOT_STUDENT', 403);
-    }
+		const redirectTo: URL = buildAuthorizationUrl(config, parameters);
 
-    if (!userData.attributes.ecole.includes('enseirb-matmeca')) {
-      throw new APIError('CAS/NOT_RIGHT_SCHOOL', 403);
-    }
+		return { 
+			"redirectUrl": redirectTo.href,
+			code_verifier,
+			state
+		}
+	}
+
+	async verifyLogin(currentUrl: URL, code_verifier: string, state: string){
+		const issuerUrlString: string | undefined = process.env.OIDC_ISSUER
+		const clientID: string | undefined = process.env.OIDC_CLIENT_ID
+		const clientSecret: string | undefined = process.env.OIDC_CLIENT_SECRET
+
+		if (issuerUrlString == undefined || clientID == undefined || clientSecret == undefined){
+			throw new APIError("OIDC/ENV_NOT_SET");
+		}
+
+		const issuer: URL = new URL(issuerUrlString);
+
+		const config: Configuration = await discovery(
+			issuer,
+			clientID,
+			clientSecret,
+		)
+		const tokens = await authorizationCodeGrant(
+			config,
+			currentUrl,
+			{
+				pkceCodeVerifier: code_verifier,
+				expectedState: state == "" ? undefined : state, 
+				idTokenExpected: true
+			}
+		)
+
+		const claims = tokens.claims()!
+		const userData = await fetchUserInfo(config, tokens.access_token, claims.sub)
 
     return {
       jwt: this.jwtService.sign({
-        login: userData.user,
-        firstName: userData.attributes.prenom.join(' '),
-        lastName: userData.attributes.nom.join(' '),
+        login: userData.uid,
+        firstName: userData.prenom,
+        lastName: userData.nom,
       }),
     };
-  }
+	}
 
   async isAdmin(login: string) {
     const admin = await AdminModel.findOne({ login });
