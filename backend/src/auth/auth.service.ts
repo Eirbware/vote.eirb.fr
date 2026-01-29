@@ -35,11 +35,23 @@ export class AuthService {
   }
 
   async loginCas(ticket: string, redirectUrl: string) {
-    const userData = await this.fetchCasData(ticket, redirectUrl);
+    const userData = await this.fetchCasData(ticket, redirectUrl)
 
-    if (!userData.attributes.profil.includes('student')) {
-      throw new APIError('CAS/NOT_STUDENT', 403);
-    }
+		if (userData.attributes.diplome === undefined){
+			throw new APIError('CAS/NOT_STUDENT');
+		}
+
+		const yearStr = userData.attributes.diplome[0].at(-1)
+
+		if (yearStr === undefined){
+			throw new APIError('CAS/NOT_RIGHT_YEAR');
+		}
+
+		const year = parseInt(yearStr)
+
+		if (year > 5 || year < 3){
+			throw new APIError('CAS/NOT_RIGHT_YEAR');
+		}
 
     if (!userData.attributes.ecole.includes('enseirb-matmeca')) {
       throw new APIError('CAS/NOT_RIGHT_SCHOOL', 403);
