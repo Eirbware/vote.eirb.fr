@@ -81,6 +81,26 @@ export class AuthService {
 		const claims = tokens.claims()!
 		const userData = await fetchUserInfo(config, tokens.access_token, claims.sub)
 
+		if (userData.ecole !== "enseirb-matmeca"){
+			throw new APIError("OIDC/WRONG_SCHOOL");
+		}
+
+
+		if (typeof userData.diplome !== "string"){
+			throw new APIError("OIDC/INVALID_ATTRIBUTE")
+		}
+
+		const yearStr = userData.diplome.at(-1);
+
+		if (yearStr === undefined){
+			throw new APIError("OIDC/TOO_OLD")
+		}
+
+		const year = parseInt(yearStr)
+		if (year > 5 || year < 3){
+			throw new APIError('OIDC/TOO_OLD');
+		}
+
     return {
       jwt: this.jwtService.sign({
         login: userData.uid,

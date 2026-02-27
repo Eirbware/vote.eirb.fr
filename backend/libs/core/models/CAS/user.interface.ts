@@ -6,5 +6,6 @@ export interface CASUser {
     nom: string[];
     prenom: string[];
     ecole: string[];
+		diplome: string[];
   };
 }
