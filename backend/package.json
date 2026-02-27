@@ -21,11 +21,12 @@
     "cli:start": "ts-node ./cli/cli.ts"
   },
   "dependencies": {
+    "@nestjs/cli": "^11.0.2",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.0",
     "@nestjs/core": "^11.0.1",
-    "@nestjs/cli": "^11.0.2",
-    "@nestjs/jwt": "^11.0.0",
+    "@nestjs/jwt": "^11.0.2",
+    "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.10",
     "@nestjs/serve-static": "^5.0.2",
     "@typegoose/typegoose": "^12.10.1",
@@ -35,6 +36,9 @@
     "nest-commander": "^3.16.0",
     "nestjs-command": "^3.1.4",
     "nestjs-typegoose": "^7.1.38",
+    "openid-client": "^6.8.1",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },

@@ -9,16 +9,26 @@ import { AuthGuard } from 'libs/core/guards';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Get('login-cas')
-  async loginCas(
-    @Query('ticket') ticket: string,
+  @Get('login')
+  async login(
     @Query('redirectUrl') redirectUrl: string,
   ) {
-    if (!ticket || !redirectUrl)
-      throw new APIError('Missing ticket or redirectUrl');
+    if (!redirectUrl)
+      throw new APIError('Missing redirectUrl');
 
-    return await this.authService.loginCas(ticket, redirectUrl);
+    return await this.authService.login(redirectUrl);
   }
+
+	@Get('verify-login')
+	async verifyLogin(
+		@Query('currentUrl') currentUrl: string,
+		@Query('code_verifier') code_verifier: string,
+		@Query('state') state: string,
+	) {
+		
+		const currentUrlObject = new URL(currentUrl)
+		return await this.authService.verifyLogin(currentUrlObject, code_verifier, state);
+	}
 
   @Get('me')
   @UseGuards(AuthGuard)

@@ -8,5 +8,5 @@ services:
     env_file:
       - .env
     environment:
-      NODE_ENV: production
+      NODE_ENV: developpement 
     command: yarn start:prod
