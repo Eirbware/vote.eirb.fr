@@ -24,6 +24,14 @@ jobs:
     # registry_username and registry_api_key must be defined
     secrets: inherit
 
+  build-and-push-cli:
+    uses: Eirbware/.github/.github/workflows/build-and-publish.yml@master
+    with:
+      file: "./Dockerfile.cli"
+      image_name: ${{ github.repository }}-cli
+    # registry_username and registry_api_key must be defined
+    secrets: inherit
+
   create-env:
     runs-on: ubuntu-latest
     steps:
@@ -52,7 +60,7 @@ jobs:
     secrets: inherit
 
   deploy:
-    needs: [ build-and-push-www, build-and-push-db, build-and-push-api ]
+    needs: [ build-and-push-www, build-and-push-db, build-and-push-api, build-and-push-cli ]
     uses: Eirbware/.github/.github/workflows/deploy-stack.yml@master
     # portainer_stack_webhook must be defined
     secrets: inherit

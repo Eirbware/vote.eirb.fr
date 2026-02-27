@@ -3,3 +3,4 @@ include:
       - docker-compose.db.yaml
       - docker-compose.api.yaml
       - docker-compose.www.yaml
+      - docker-compose.cli.yaml

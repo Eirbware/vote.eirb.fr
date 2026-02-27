@@ -13,11 +13,9 @@ import * as adminsDataRaw from '../../data/admins.json';
 export class SeedAdminDbCommand extends CommandRunner {
   async run(): Promise<void> {
     try {
+			await AdminModel.deleteMany()
+
       for (const admin of adminsDataRaw) {
-        const existAdmin = await AdminModel.findOne({ login: admin.login });
-        if (existAdmin) {
-          continue;
-        }
         const newAdmin = new AdminModel(admin);
         await newAdmin.save();
       }
