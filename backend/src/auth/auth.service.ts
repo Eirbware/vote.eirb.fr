@@ -96,10 +96,12 @@ export class AuthService {
 			throw new APIError("OIDC/TOO_OLD")
 		}
 
+		/*
 		const year = parseInt(yearStr)
 		if (year > 5 || year < 3){
 			throw new APIError('OIDC/TOO_OLD');
 		}
+		*/
 
     return {
       jwt: this.jwtService.sign({
